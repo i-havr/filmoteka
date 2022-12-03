@@ -1,0 +1,20 @@
+/* Logo Styles */
+
+.logo {
+  @include mq(tab) {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  &__text {
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 35px;
+    color: var(--main-light-color);
+
+    @include mq(mob-only) {
+      display: none;
+    }
+  }
+}

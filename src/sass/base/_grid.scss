@@ -1,0 +1,13 @@
+/* Grid Styles */
+
+.grid {
+  gap: var(--grid-indent);
+  flex-wrap: wrap;
+
+  &__item {
+    flex-basis: calc(
+      (100% - (var(--grid-indent) * (var(--grid-items) - 1))) /
+        var(--grid-items)
+    );
+  }
+}

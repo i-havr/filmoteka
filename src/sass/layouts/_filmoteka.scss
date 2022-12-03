@@ -1,0 +1,28 @@
+/* Hero Section Styles */
+
+.filmoteka {
+  @include section();
+  margin: 0 auto;
+  min-width: 320px;
+  max-width: 480px;
+  background-color: var(--main-light-color);
+
+  @include mq(tab) {
+    @include section(60px, 60px);
+    max-width: 768px;
+  }
+
+  @include mq(desk) {
+    @include section(60px, 60px);
+    max-width: 1280px;
+  }
+}
+
+.filmoteka__pagination {
+  padding-top: 40px;
+  padding-bottom: 20px;
+  @include mq(tab) {
+    padding-top: 60px;
+    padding-bottom: 0;
+  }
+}

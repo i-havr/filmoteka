@@ -1,1 +1,31 @@
-<div class="container">Cards</div>
+<section class="filmoteka">
+  <div class="container">
+    <h1 class="title filmoteka__title visually-hidden">Filmoteka</h1>
+    <ul class="list grid filmoteka__list" id="filmoteka-list">
+      <!-- Li з карткою всередині -->
+      <!-- start -->
+      <li class="grid__item filmoteka__item">
+        <a class="filmoteka__link link" href="#">
+          <div class="card">
+            <div class="card__img">
+              <img src="./images/test.jpg" alt="" />
+            </div>
+            <div class="card__wrapper">
+              <h2 class="card__title title">
+                HE GUARDIANS OF THE GALAXY HOLIDAY SPECIAL
+              </h2>
+              <p class="card__desc">
+                Comedy, Science Fiction, Adventure | 2022
+              </p>
+            </div>
+          </div>
+        </a>
+      </li>
+      <!-- end -->
+    </ul>
+    <div class="filmoteka__pagination">
+      <!-- Pagination -->
+      <include src="./partials/pagination.html"></include>
+    </div>
+  </div>
+</section>

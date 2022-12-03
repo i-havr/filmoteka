@@ -1,0 +1,19 @@
+/* Title Styles */
+
+.title {
+  font-size: 28px;
+  line-height: 1.17;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  // text-align: center;
+
+  @include mq(desk) {
+    font-size: 36px;
+  }
+}
+
+/* Subtitle Styles */
+
+.subtitle {
+  margin-bottom: 10px;
+}
