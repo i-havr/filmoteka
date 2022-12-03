@@ -1,0 +1,15 @@
+/* Global Styles */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--main-font);
+  color: var(--main-font-color);
+}
+
+.no-scroll {
+  overflow: hidden;
+  // padding-right: 16px;
+}

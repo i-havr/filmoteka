@@ -1,0 +1,75 @@
+//Section Padding Top and Bottom
+
+$default-sec-pad: 20px;
+$default-sec-pad: 20px;
+@mixin section($p-top: $default-sec-pad, $p-bot: $p-top) {
+  @if $p-top == default {
+    padding-top: $default-sec-pad;
+  } @else {
+    padding-top: $p-top;
+  }
+
+  @if $p-bot == default {
+    padding-bottom: $default-sec-pad;
+  } @else {
+    padding-bottom: $p-bot;
+  }
+
+  padding-left: 20px;
+  padding-right: 20px;
+
+  @media screen and (min-width: 768px) {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+
+  margin: 0 auto;
+
+  // min-width: 320px;
+  // max-width: 480px;
+  //outline: 2px solid tomato;
+}
+
+// Media Queries
+
+@mixin mq($type) {
+  $mob: 480px;
+  $tab: 768px;
+  $desk: 1280px;
+
+  @if $type == mob-only {
+    @media screen and (max-width: ($tab - 0.02)) {
+      @content;
+    }
+  }
+
+  @if $type == mob {
+    @media screen and (min-width: $mob) {
+      @content;
+    }
+  }
+
+  @if $type == tab {
+    @media screen and (min-width: $tab) {
+      @content;
+    }
+  }
+
+  @if $type == tab-only {
+    @media screen and (min-width: $tab) and (max-width: ($desk - 0.02)) {
+      @content;
+    }
+  }
+
+  @if $type == desk {
+    @media screen and (min-width: $desk) {
+      @content;
+    }
+  }
+
+  @if $type == no-desk {
+    @media screen and (max-width: ($desk - 0.02)) {
+      @content;
+    }
+  }
+}

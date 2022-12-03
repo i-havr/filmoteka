@@ -1,0 +1,38 @@
+/* Reset Styles */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.list {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.icon {
+  fill: currentColor;
+}
+
+.link {
+  text-decoration: none;
+
+  &:hover,
+  &:focus {
+    outline-color: var(--main-accent-color);
+  }
+}

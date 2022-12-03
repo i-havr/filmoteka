@@ -1,0 +1,45 @@
+/* Footer Styles*/
+
+.footer {
+  @include section(30px);
+  background-color: var(--main-gray-color);
+}
+
+.footer__container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  justify-content: center;
+  align-items: center;
+  padding: 0 24px;
+
+  @include mq(mob-only) {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+.footer__wrapper {
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  display: flex;
+}
+
+.footer__title {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  text-align: center;
+
+  color: var(--header-font-color);
+
+  @include mq(tab) {
+    font-size: 16px;
+    line-height: 19px;
+  }
+}
+
+.footer__icon {
+  color: var(--header-font-color);
+}

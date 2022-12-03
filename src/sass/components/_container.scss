@@ -1,0 +1,23 @@
+/* Container Styles */
+
+.container {
+  min-width: 280px;
+  max-width: 480px;
+  margin: 0 auto;
+  // padding: 20px;
+
+  @include mq(tab) {
+    max-width: 768px;
+  }
+
+  @include mq(desk) {
+    max-width: 1280px;
+  }
+
+  &--flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    // justify-content: space-between;
+  }
+}
