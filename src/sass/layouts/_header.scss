@@ -1,12 +1,30 @@
 /* Header Styles */
 
 .header {
-  @include section(40px, 44px);
+  padding-top: 40px;
+  padding-bottom: 44px;
   min-width: 320px;
   max-width: 100%;
 
   background-position: center;
   background-size: cover;
+}
+
+.header__section {
+  @include section(0, 0);
+
+  min-width: 320px;
+  max-width: 480px;
+
+  @include mq(tab) {
+    @include section(0, 0);
+    max-width: 768px;
+  }
+
+  @include mq(desk) {
+    @include section(0, 0);
+    max-width: 1280px;
+  }
 }
 
 .header__container {
