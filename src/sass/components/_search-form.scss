@@ -37,18 +37,26 @@
 
 .search__btn {
   position: absolute;
-  top: 0;
-  right: 0;
-  width: 20px;
-  height: 20px;
-  padding: 0;
+  top: -8px;
+  right: -12px;
+  min-width: 20px;
+  min-height: 20px;
+  padding: 16px;
   border: none;
+  color: var(--main-light-color);
   background-color: transparent;
   display: flex;
   justify-content: center;
   align-items: center;
 
   cursor: pointer;
+
+  transition: color var(--animation);
+}
+
+.search__btn:hover,
+.search__btn:focus {
+  color: var(--accent-font-color);
 }
 
 .search__info {

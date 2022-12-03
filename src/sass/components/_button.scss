@@ -34,5 +34,6 @@
   &--active {
     border-color: var(--main-accent-color);
     background-color: var(--main-accent-color);
+    box-shadow: var(--btn-box-shadow);
   }
 }

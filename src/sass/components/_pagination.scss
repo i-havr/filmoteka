@@ -19,6 +19,7 @@
 .pagination__button:hover,
 .pagination__button:focus {
   color: var(--main-light-color);
+  box-shadow: var(--card-box-shadow);
 }
 
 .pagination__img {

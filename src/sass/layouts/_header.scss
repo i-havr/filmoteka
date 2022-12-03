@@ -3,26 +3,22 @@
 .header {
   @include section(40px, 44px);
   min-width: 320px;
-  max-width: 480px;
+  max-width: 100%;
 
   background-position: center;
   background-size: cover;
-
-  @include mq(tab) {
-    max-width: 768px;
-  }
-
-  @include mq(desk) {
-    max-width: 1280px;
-  }
 }
 
 .header__container {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  gap: 50px;
+  gap: 52px;
   padding: 0;
+
+  @include mq(tab) {
+    gap: 40px;
+  }
 }
 
 .header__wrapper {
@@ -90,8 +86,6 @@
   }
 
   @include mq(desk) {
-    max-width: 1280px;
-
     background-image: linear-gradient(
         var(--header-background-color),
         var(--header-background-color)
