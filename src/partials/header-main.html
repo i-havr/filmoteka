@@ -8,25 +8,39 @@
 
       <ul class="list navigation__list">
         <li class="navigation__item">
-          <a id="home-link" class="link navigation__link navigation__link--current" href="./index.html">Home</a>
+          <a
+            id="home-link"
+            class="link navigation__link navigation__link--current"
+            href="./index.html"
+            >Home</a
+          >
         </li>
         <li class="navigation-item">
-          <a id="mylib-link" class="link navigation__link" href="./library.html">My library</a>
+          <a id="mylib-link" class="link navigation__link" href="./library.html"
+            >My library</a
+          >
         </li>
       </ul>
     </nav>
 
     <form class="search" id="search-form">
-      <input class="search__input" type="text" name="searchQuery" autocomplete="off" autofocus
-        placeholder="Movie search" required minlength="3" />
+      <input
+        class="search__input"
+        type="text"
+        name="searchQuery"
+        autocomplete="off"
+        autofocus
+        placeholder="Movie search"
+        required
+        minlength="3"
+      />
       <button class="search__btn" type="submit" title="Search">
         <svg class="icon search__icon" width="12" height="12">
           <use href="./images/icons.svg#icon-search"></use>
         </svg>
       </button>
       <p class="search__info">
-        Search result not successful. Please enter another key word and try
-        again
+        Search result not successful. Please try another key word
       </p>
     </form>
   </div>
