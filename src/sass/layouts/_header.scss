@@ -26,6 +26,14 @@
   justify-content: center;
   align-items: center;
   gap: 20px;
+
+  @include mq(tab) {
+    gap: 32px;
+  }
+
+  @include mq(desk) {
+    gap: 16px;
+  }
   // margin-top: 12px;
   // margin-bottom: 16px;
 }
