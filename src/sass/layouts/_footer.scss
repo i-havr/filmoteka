@@ -26,7 +26,7 @@
   display: flex;
 }
 
-.footer__title {
+.footer__text {
   font-weight: 400;
   font-size: 14px;
   line-height: 16px;
@@ -40,6 +40,16 @@
   }
 }
 
-.footer__icon {
-  color: var(--header-font-color);
+// .footer__icon {
+//   color: var(--header-font-color);
+// }
+
+.footer__link {
+  color: inherit;
+  transition: color var(--animation);
+
+  &:hover,
+  &:focus {
+    color: var(--main-accent-color);
+  }
 }
