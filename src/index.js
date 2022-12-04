@@ -28,7 +28,7 @@ async function test() {
   );
 
   //   await movies.getMovieTrailers(10588);
-  console.log('getGenres ', await movies.getMovieTrailers(10588));
+  console.log('getMovieTrailers ->', await movies.getMovieTrailers(10588));
 }
 
 test();
