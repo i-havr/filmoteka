@@ -28,6 +28,11 @@
   font-size: 12px;
   line-height: 14px;
   text-transform: uppercase;
+
+  @include mq(desk) {
+    font-size: 20px;
+    line-height: 24px;
+  }
 }
 
 .card__desc {
@@ -35,6 +40,11 @@
   font-size: 12px;
   line-height: 16px;
   color: var(--accent-font-color);
+
+  @include mq(desk) {
+    font-size: 20px;
+    line-height: 24px;
+  }
 }
 
 .card__vote {
