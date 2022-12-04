@@ -20,7 +20,6 @@
   border-radius: 5px;
   transition: box-shadow var(--animation);
   overflow: hidden;
-  height: 402px;
 
   @include mq(tab) {
     height: 455px;
