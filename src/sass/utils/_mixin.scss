@@ -73,3 +73,7 @@ $default-sec-pad: 20px;
     }
   }
 }
+
+@mixin flex-based($items, $indent: 20px) {
+  flex-basis: calc((100% - $indent * ($items - 1)) / $items);
+}
