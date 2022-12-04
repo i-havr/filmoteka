@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 import { Movies } from './fetch';
 
 const APIKey = 'e0e51fe83e5367383559a53110fae0e8';
@@ -96,48 +95,4 @@ async function getGenres() {
 
 function clearFilmoteka() {
   refs.filmotekaList.innerHTML = '';
-=======
-import 
-
-let page = 1;
-
-if (refs.formSearch) {
-  refs.formSearch.addEventListener('submit', onFormSubmit);
-}
-
-export async function onFormSubmit(e) {
-  e.preventDefault();
-  spinnerPlay();
-
-  refs.notification.textContent = '';
-
-  const searchResult = e.target.elements.searchQuery.value.trim().toLowerCase();
-
-  if (searchResult) {
-    const storageValue = JSON.stringify(searchResult);
-    localStorage.setItem('searchValue', storageValue);
-    const storagePage = JSON.stringify(page);
-    localStorage.setItem('page', storagePage);
-    try {
-      const markupPictures = await getSearchMovies(searchResult, page);
-
-      if (markupPictures.length) {
-        clearGallery(refs.galleryMovies);
-        renderMoviesGallery(markupPictures, refs.galleryMovies);
-      } else {
-        notification();
-      }
-    } catch (error) {
-      notification();
-    }
-  } else {
-    notification();
-  }
-  spinnerStop();
-}
-
-function notification() {
-  refs.notification.textContent =
-    'Search result not successful. Enter the correct movie name and try again.';
->>>>>>> Stashed changes
 }
