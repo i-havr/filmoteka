@@ -17,11 +17,12 @@ async function Start() {
   await getMovies();
 }
 
-async function getMovies() {
+// Page from pagination
+export async function getMovies(page) {
   const movies = new Movies(APIKey);
 
   try {
-    const moviesArr = await movies.getTrendingMovies();
+    const moviesArr = await movies.getTrendingMovies(page);
     console.log('moviesArr ', moviesArr);
 
     if (moviesArr.length === 0) {
