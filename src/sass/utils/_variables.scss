@@ -55,14 +55,6 @@
   /* Grid setting */
   --grid-items: 1;
 
-  @media screen and (min-width: 768px) {
-    --grid-items: 2;
-  }
-
-  @media screen and (min-width: 1280px) {
-    --grid-items: 3;
-  }
-
   --grid-indent: 20px;
 
   /* Animation setting */

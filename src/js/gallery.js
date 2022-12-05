@@ -1,11 +1,13 @@
 import { Movies } from './fetch';
+import clearFilmoteka from './clearFilmoteka';
+import refs from './refs';
 
 const APIKey = 'e0e51fe83e5367383559a53110fae0e8';
 
-const refs = {
-  searchForm: document.querySelector('#search-form'),
-  filmotekaList: document.querySelector('#filmoteka-list'),
-};
+// const refs = {
+//   searchForm: document.querySelector('#search-form'),
+//   filmotekaList: document.querySelector('#filmoteka-list'),
+// };
 
 let GENRES = [0];
 
@@ -17,11 +19,12 @@ async function Start() {
   await getMovies();
 }
 
-async function getMovies() {
+// Page from pagination
+export async function getMovies(page) {
   const movies = new Movies(APIKey);
 
   try {
-    const moviesArr = await movies.getTrendingMovies();
+    const moviesArr = await movies.getTrendingMovies(page);
     console.log('moviesArr ', moviesArr);
 
     if (moviesArr.length === 0) {
@@ -30,6 +33,8 @@ async function getMovies() {
       );
     }
 
+    clearFilmoteka();
+
     markupFilmoteka(moviesArr.results);
   } catch (error) {
     console.log(error.message);
@@ -37,6 +42,7 @@ async function getMovies() {
 }
 
 function markupFilmoteka(dataArr) {
+  console.log();
   refs.filmotekaList.insertAdjacentHTML(
     'beforeend',
     dataArr.map(markupCard).join('')
@@ -91,8 +97,4 @@ async function getGenres() {
   } catch (error) {
     console.log(error.message);
   }
-}
-
-function clearFilmoteka() {
-  refs.filmotekaList.innerHTML = '';
 }
