@@ -7,7 +7,7 @@ import './js/gallery';
 import './js/search';
 import './js/pagination';
 import './js/watched';
-import './js/arrow-up'; n
+import './js/arrow-up';
 
 
 
