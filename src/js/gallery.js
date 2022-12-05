@@ -17,12 +17,9 @@ export async function getMovies(page) {
   const movies = new Movies(APIKey);
 
   try {
-
-    const moviesArr = await movies.getTrendingMovies();
-    console.log('moviesArr ', moviesArr.results);
-
     const { results } = await movies.getTrendingMovies(page);
     console.log('results ', results);
+
 
     if (results.length === 0) {
       throw new Error(
@@ -41,6 +38,7 @@ export async function getMovies(page) {
 
 
 
-function clearFilmoteka() {
-  refs.filmotekaList.innerHTML = '';
-}
+
+
+
+
