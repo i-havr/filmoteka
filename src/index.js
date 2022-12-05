@@ -4,6 +4,7 @@ import { Movies } from './js/fetch';
 import './js/modal-film-card';
 import './js/modal-students';
 import './js/gallery';
+import './js/watched';
 
 const APIKey = 'e0e51fe83e5367383559a53110fae0e8';
 
