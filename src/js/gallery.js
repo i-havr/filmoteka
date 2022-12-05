@@ -22,7 +22,7 @@ async function getMovies() {
 
   try {
     const moviesArr = await movies.getTrendingMovies();
-    console.log('moviesArr ', moviesArr);
+    console.log('moviesArr ', moviesArr.results);
 
     if (moviesArr.length === 0) {
       throw new Error(
@@ -52,13 +52,13 @@ function markupCard(imgObj) {
 
   const genres = markupGenres(imgObj.genre_ids);
 
-  return `<li class="grid__item filmoteka__item">
+  return `<li class="grid__item filmoteka__item" data-id="${imgObj.id}">
 			<div class="card" data-id="${imgObj.id}">
                 <div class="card__img">
 					<img src="${URI}" alt="${imgObj.title}">
 				</div>
                     <div class="card__wrapper">
-                        <h2 class="card__title title">${imgObj.title}</h2>
+                        <h2 class="card__title title"">${imgObj.title}</h2>
                         <p class="card__desc">${genres} | ${date.getFullYear()}
                         </p>
                     </div>

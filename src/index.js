@@ -5,6 +5,7 @@ import './js/modal-film-card';
 import './js/modal-students';
 import './js/gallery';
 
+
 const APIKey = 'e0e51fe83e5367383559a53110fae0e8';
 
 // Приклад використання запитів до API

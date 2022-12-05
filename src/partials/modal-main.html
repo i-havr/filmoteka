@@ -1,6 +1,15 @@
 <!-- Modal -->
-<div class="backdrop is-hidden" data-modal>
-    <div class="modal">
-        <h2 class="title visually-hidden">Modalka</h2>
-    </div>
+<div class="backdrop is-hidden" data-modal="open">
+  <div class="modal">
+    <h2 class="visually-hidden">Movie Card</h2>
+    <button class="modal__close-btn" type="button" data-modal="close">
+      <svg class="modal__icon" width="30" height="30" aria-label="true">
+        <use href="./images/icons.svg#icon-close"></use>
+      </svg>
+    </button>
+    <div class="modal__content movie-details"></div>
+    <button class="button" type="button"></button>
+    <button class="button" type="button"></button>
+    <button class="button" type="button"></button>
+  </div>
 </div>
