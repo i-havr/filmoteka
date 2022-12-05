@@ -1,4 +1,5 @@
 import { Movies } from './fetch';
+import { addLoadingSpinner, removeLoadingSpinner } from './loading-spinner';
 
 const APIKey = 'e0e51fe83e5367383559a53110fae0e8';
 
@@ -12,9 +13,10 @@ let GENRES = [0];
 Start();
 
 async function Start() {
+  addLoadingSpinner();
   await getGenres();
-
   await getMovies();
+  removeLoadingSpinner();
 }
 
 async function getMovies() {
