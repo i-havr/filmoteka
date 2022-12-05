@@ -1,11 +1,13 @@
 import { Movies } from './fetch';
+import clearFilmoteka from './clearFilmoteka';
+import refs from './refs';
 
 const APIKey = 'e0e51fe83e5367383559a53110fae0e8';
 
-const refs = {
-  searchForm: document.querySelector('#search-form'),
-  filmotekaList: document.querySelector('#filmoteka-list'),
-};
+// const refs = {
+//   searchForm: document.querySelector('#search-form'),
+//   filmotekaList: document.querySelector('#filmoteka-list'),
+// };
 
 let GENRES = [0];
 
@@ -31,6 +33,8 @@ export async function getMovies(page) {
       );
     }
 
+    clearFilmoteka();
+
     markupFilmoteka(moviesArr.results);
   } catch (error) {
     console.log(error.message);
@@ -38,6 +42,7 @@ export async function getMovies(page) {
 }
 
 function markupFilmoteka(dataArr) {
+  console.log();
   refs.filmotekaList.insertAdjacentHTML(
     'beforeend',
     dataArr.map(markupCard).join('')
@@ -92,8 +97,4 @@ async function getGenres() {
   } catch (error) {
     console.log(error.message);
   }
-}
-
-function clearFilmoteka() {
-  refs.filmotekaList.innerHTML = '';
 }
