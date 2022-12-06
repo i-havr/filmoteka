@@ -20,6 +20,7 @@ export async function getMovies(page) {
     const { results } = await movies.getTrendingMovies(page);
     console.log('results ', results);
 
+
     if (results.length === 0) {
       throw new Error(
         'Sorry, there are no movies matching your search query. Please try again.'
@@ -34,3 +35,10 @@ export async function getMovies(page) {
     console.log(error.message);
   }
 }
+
+
+
+
+
+
+

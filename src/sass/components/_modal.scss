@@ -1,64 +1,39 @@
 /* Modal Styles */
 
-// .modal {
-//   position: fixed;
-//   left: 50%;
-//   top: 50%;
-//   z-index: 100;
-//   padding: 40px;
+.modal {
+  position: fixed;
+  left: 50%;
+  top: 50%;
 
-//   min-width: 290px;
-//   width: 450px;
-//   max-height: 100%;
-//   overflow-y: auto;
+  padding: 48px 20px 40px;
+  width: 90%;
+  max-width: 380px;
+  max-height: 100%;
+  overflow-y: auto;
 
-//   background-color: var(--main-light-color);
-//   box-shadow: var(--modal-box-shadow);
-//   border-radius: 4px;
+  background-color: #fff;
 
-//   transform: translate(-50%, -50%) scale(1);
-//   transition: transform var(--animation);
+  transform: translate(-50%, -50%) scale(1);
+  transition: transform var(--animation);
 
-//   @media screen and (max-width: 480px) {
-//     width: calc(100vw - 30px);
-//   }
+  .backdrop.is-hidden & {
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+}
 
-//   @include mq(desk) {
-//     width: 528px;
-//   }
+.modal__close-btn {
+  position: absolute;
 
-//   .backdrop.is-hidden & {
-//     transform: translate(-50%, -50%) scale(0.9);
-//   }
-// }
-
-// .modal__close-btn {
-//   position: absolute;
-//   top: 8px;
-//   right: 8px;
-//   width: 31px;
-//   height: 31px;
-//   z-index: 10;
-
-//   background-color: transparent;
-//   border-radius: 50%;
-//   border: none;
-//   outline: 1px solid var(--modal-close-btn-border-color);
-//   outline-offset: -1px;
-//   cursor: pointer;
-
-//   transition: outline-color var(--animation), box-shadow var(--animation);
-
-//   &:hover,
-//   &:focus {
-//     outline-color: var(--main-accent-color);
-//     box-shadow: var(--modal-close-btn-box-shadow);
-//   }
-
-//   &-icon {
-//     position: absolute;
-//     top: 50%;
-//     left: 50%;
-//     transform: translate(-50%, -50%);
-//   }
-// }
+  top: 8px;
+  right: 8px;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+.modal__content {
+  margin-bottom: 20px;
+}
