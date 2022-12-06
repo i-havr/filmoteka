@@ -1,10 +1,8 @@
 import { addLoadingSpinner, removeLoadingSpinner } from './loading-spinner';
 import { Movies } from './fetch';
 import clearFilmoteka from './clearFilmoteka';
-import { markupFilmoteka, getGenres } from './markup';
+import { markupFilmoteka, getGenres, APIKey } from './markup';
 import refs from './refs';
-
-const APIKey = 'e0e51fe83e5367383559a53110fae0e8';
 
 let searchValue = 'cat';
 
