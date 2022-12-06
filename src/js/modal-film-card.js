@@ -1,7 +1,12 @@
-import { Movies } from './fetch'
+import { Movies } from './fetch';
+import { APIKey } from './markup';
 
 export default class ModalMovie {
-  constructor({ container, btnClose, openModal, modalContent }, IMAGE_URL, APIKey) {
+  constructor(
+    { container, btnClose, openModal, modalContent },
+    IMAGE_URL,
+    APIKey
+  ) {
     this.container = container;
     this.btnClose = btnClose;
     this.openModal = openModal;
@@ -25,7 +30,7 @@ export default class ModalMovie {
 
   onOpenModal(e) {
     if (e.target.nodeName === 'UL') {
-      return
+      return;
     }
     this.openModal.classList.remove('is-hidden');
     const movieId = e.target.closest('.filmoteka__item').dataset.id;
@@ -33,15 +38,16 @@ export default class ModalMovie {
   }
 
   getMovieDetals(movie) {
-    this.fetchMovie(movie).then(data => {
-      this.onMarkup(data);
-    })
+    this.fetchMovie(movie)
+      .then(data => {
+        this.onMarkup(data);
+      })
       .catch(error => {
         console.log(error);
-      })
+      });
   }
   onEscape(e) {
-    const isEscape = e.code === "Escape";
+    const isEscape = e.code === 'Escape';
     if (isEscape) {
       this.onCloseModal();
       window.removeEventListener('keydown', this.onEscape.bind(this));
@@ -53,8 +59,17 @@ export default class ModalMovie {
   }
 
   onMarkup(data) {
-
-    let { poster_path, title, vote_average, vote_count, popularity, original_title, genres, overview, id } = data;
+    let {
+      poster_path,
+      title,
+      vote_average,
+      vote_count,
+      popularity,
+      original_title,
+      genres,
+      overview,
+      id,
+    } = data;
 
     genres = genres.map(item => item.name).join(', ');
     vote_average = vote_average.toFixed(1);
@@ -82,29 +97,17 @@ export default class ModalMovie {
     </div>
     </div>
     `;
-    this.modalContent.insertAdjacentHTML("beforeend", markup);
+    this.modalContent.insertAdjacentHTML('beforeend', markup);
   }
 }
 
 const getRef = x => document.querySelector(x);
-const IMAGE_URL = 'https://image.tmdb.org/t/p/w500'
-const APIKey = 'e0e51fe83e5367383559a53110fae0e8';
+const IMAGE_URL = 'https://image.tmdb.org/t/p/w500';
 const refs = {
   container: getRef('#filmoteka-list'),
   btnClose: getRef('button[data-modal="close"]'),
   openModal: getRef('[data-modal="open"]'),
   modalContent: getRef('.movie-details'),
-}
+};
 
 new ModalMovie(refs, IMAGE_URL, APIKey).init();
-
-
-
-
-
-
-
-
-
-
-
