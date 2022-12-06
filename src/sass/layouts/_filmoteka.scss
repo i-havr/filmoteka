@@ -5,7 +5,7 @@
 
   min-width: 320px;
   max-width: 480px;
-  background-color: var(--main-light-color);
+  // background-color: var(--main-light-color);
 
   @include mq(tab) {
     @include section(60px, 60px);

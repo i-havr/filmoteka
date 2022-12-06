@@ -1,9 +1,19 @@
 import { addLoadingSpinner, removeLoadingSpinner } from './loading-spinner';
 import { Movies } from './fetch';
 import clearFilmoteka from './clearFilmoteka';
-import { markupFilmoteka, getGenres } from './markup';
+import { markupFilmoteka, getGenres, APIKey } from './markup';
+import refs from './refs';
 
-const APIKey = 'e0e51fe83e5367383559a53110fae0e8';
+let searchValue = 'cat';
+
+refs.searchForm.addEventListener('submit', onSubmitForm);
+
+function onSubmitForm(evt) {
+  evt.preventDefault();
+  searchValue = evt.currentTarget.elements.searchQuery.value;
+  clearFilmoteka();
+  Start();
+}
 
 Start();
 
@@ -24,7 +34,6 @@ export async function getMovies(page) {
     const { results } = await movies.getTrendingMovies(page);
     console.log('results ', results);
 
-
     if (results.length === 0) {
       throw new Error(
         'Sorry, there are no movies matching your search query. Please try again.'
@@ -39,10 +48,3 @@ export async function getMovies(page) {
     console.log(error.message);
   }
 }
-
-
-
-
-
-
-
