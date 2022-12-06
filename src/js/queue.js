@@ -5,8 +5,12 @@ const APIKey = 'e0e51fe83e5367383559a53110fae0e8';
 const refs = {
     modalQueueBtnAdd: document.querySelector('#modal__button-queue')
 }
-
+try {
     refs.modalQueueBtnAdd.addEventListener('click', addToQueue);
+} catch (error) {
+    console.log('error')
+}
+    
 
 let queueMovie = [];
 let queueMovieById = [];
