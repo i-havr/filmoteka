@@ -29,14 +29,13 @@ export async function getMovies(page) {
   const movies = new Movies(APIKey);
 
   try {
-<<<<<<< Updated upstream
     const { results } = await movies.getTrendingMovies(page);
     console.log('results ', results);
-=======
+
     // const moviesArr = await movies.getTrendingMovies();
-    const moviesArr = await movies.searchMovies(searchValue);
-    console.log('moviesArr ', moviesArr);
->>>>>>> Stashed changes
+    //     const moviesArr = await movies.searchMovies(searchValue);
+    //     console.log('moviesArr ', moviesArr);
+    // >>>>>>> Stashed changes
 
     if (results.length === 0) {
       throw new Error(
