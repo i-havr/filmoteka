@@ -1,4 +1,6 @@
 import { Movies } from './fetch';
+import * as basicLightbox from 'basiclightbox';
+import "basiclightbox/dist/basiclightbox.min.css";
 
 export default class ModalMovie {
   constructor(
@@ -60,14 +62,18 @@ export default class ModalMovie {
       original_title,
       genres,
       overview,
-      video
+      video,
+      id
     } = data;
 
     genres = genres.map(item => item.name).join(', ');
     vote_average = vote_average.toFixed(1);
     popularity = popularity.toFixed(1);
     const markup = `<div>
-      <img class="movie-details__img" src="${IMAGE_URL}${poster_path}"/>
+      <div class="movie-details__preview-wrapper">
+        <img class="movie-details__img" src="${IMAGE_URL}${poster_path}"/>
+        ${video ? '<button class="button movie-details__button-trailer" data-trailer type="button">Show trailer</button>' : undefined}
+      </div>
       <h3 class="movie-details__title">${title}</h3>
       <table><tbody class="table"><tr>
         <td class="movie-details__name">Vote / Votes</td><td class="movie-details__slash"><span class="movie-details__vote movie-details__vote--average">${vote_average}</span> / <span class="movie-details__vote">${vote_count}</span></td>
@@ -82,20 +88,29 @@ export default class ModalMovie {
       <p class="movie-details__text">${overview}</p>
       <button class="button" type="button"></button>
       <button class="button" type="button"></button>
-      <button class="button button-trailer" type="button">Show trailer</button>
     </div>`;
     this.modalContent.insertAdjacentHTML('beforeend', markup);
 
-    let trailerRun;
-    console.log(3333333333, video);
     if (video) {
-        trailerRun = this.modalContent.querySelector('.button-trailer');
-        console.log(trailerRun)
-
-        trailerRun.addEventListener('click', () => {
-            console.log(12)
-        })
+        this.startListenTrailerClick(id);
     }
+  }
+
+  startListenTrailerClick(id) {
+    const trailerRun = this.modalContent.querySelector('[data-trailer]');
+
+    trailerRun.addEventListener('click', async() => {
+      const movies = new Movies(this.APIKey);
+      const { results } = await movies.getMovieTrailers(id);
+
+      const youTubeVideo = results.find(vid => vid.site === "YouTube");
+      
+      const instance = basicLightbox.create(`
+        <iframe src="https://www.youtube.com/embed/${youTubeVideo.key}" width="560" height="315" frameborder="0"></iframe>
+      `);
+      
+      instance.show()
+    });
   }
 }
 
