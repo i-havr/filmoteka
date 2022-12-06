@@ -22,7 +22,8 @@ body {
   border: none;
   background-color: transparent;
   cursor: pointer;
-  padding: 10px;
+  padding-bottom: 5px;
+
   border-radius: 15px;
   transition: 0.3s;
   &:hover {
@@ -30,12 +31,12 @@ body {
     -webkit-transform: rotate(-20deg) scale(1.15);
   }
   @media screen and (max-width: 320px) {
-    font-size: 20px;
+    font-size: 15px;
   }
   @media screen and (min-width: 320px) {
-    font-size: 20px;
+    font-size: 15px;
   }
   @media screen and (min-width: 768px) {
-    font-size: 30px;
+    font-size: 18px;
   }
 }
