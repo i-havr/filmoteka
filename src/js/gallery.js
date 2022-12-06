@@ -9,8 +9,10 @@ Start();
 
 async function Start() {
   addLoadingSpinner();
+
   await getGenres();
   await getMovies();
+
   removeLoadingSpinner();
 }
 
