@@ -37,3 +37,13 @@
     box-shadow: var(--btn-box-shadow);
   }
 }
+
+.button__modal {
+    color: var(--main-font-color);
+    border-color: var(--main-dark-color);
+  
+    &:hover,
+    :focus {
+      color: var(--main-light-color);
+    }
+}

@@ -46,12 +46,12 @@ export default class ModalMovie {
     }
 
     onMarkup(data) {
-        let { poster_path, title, vote_average, vote_count, popularity, original_title, genres, overview } = data;
+        let { poster_path, title, vote_average, vote_count, popularity, original_title, genres, overview, id } = data;
 
         genres = genres.map(item => item.name).join(', ')
         vote_average = vote_average.toFixed(1);
         popularity = popularity.toFixed(1);
-        const markup = `<div>
+        const markup = `<div data-id="${id}">
     <img class="movie-details__img" src="${IMAGE_URL}${poster_path}"/>
     <h3 class="movie-details__title">${title}</h3>
     <table><tbody class="table"><tr>
