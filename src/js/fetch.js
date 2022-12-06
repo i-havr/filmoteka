@@ -14,6 +14,7 @@ export class Movies {
 
     return this.fetchMovies(URI);
   }
+  
 
   searchMovies(query, page = 1) {
     const URI = `https://api.themoviedb.org/3/search/movie?api_key=${this.APIKey}&query=${query}&page=${page}`;

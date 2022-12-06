@@ -60,27 +60,42 @@ export default class ModalMovie {
       original_title,
       genres,
       overview,
+      video
     } = data;
 
     genres = genres.map(item => item.name).join(', ');
     vote_average = vote_average.toFixed(1);
     popularity = popularity.toFixed(1);
     const markup = `<div>
-    <img class="movie-details__img" src="${IMAGE_URL}${poster_path}"/>
-    <h3 class="movie-details__title">${title}</h3>
-    <table><tbody class="table"><tr>
-      <td class="movie-details__name">Vote / Votes</td><td class="movie-details__slash"><span class="movie-details__vote movie-details__vote--average">${vote_average}</span> / <span class="movie-details__vote">${vote_count}</span></td>
-    </tr><tr>
-      <td class="movie-details__name">Popularity</td><td class="movie-details__value">${popularity}</td>
-    </tr><tr>
-      <td class="movie-details__name">Original Title</td><td class="movie-details__value">${original_title}</td>
-    </tr><tr>
-      <td class="movie-details__name">Genre</td><td class="movie-details__genres">${genres}</td>
-    </tr></tbody></table>
-    <h4 class="movie-details__about">ABOUT</h4>
-    <p class="movie-details__text">${overview}</p>
+      <img class="movie-details__img" src="${IMAGE_URL}${poster_path}"/>
+      <h3 class="movie-details__title">${title}</h3>
+      <table><tbody class="table"><tr>
+        <td class="movie-details__name">Vote / Votes</td><td class="movie-details__slash"><span class="movie-details__vote movie-details__vote--average">${vote_average}</span> / <span class="movie-details__vote">${vote_count}</span></td>
+      </tr><tr>
+        <td class="movie-details__name">Popularity</td><td class="movie-details__value">${popularity}</td>
+      </tr><tr>
+        <td class="movie-details__name">Original Title</td><td class="movie-details__value">${original_title}</td>
+      </tr><tr>
+        <td class="movie-details__name">Genre</td><td class="movie-details__genres">${genres}</td>
+      </tr></tbody></table>
+      <h4 class="movie-details__about">ABOUT</h4>
+      <p class="movie-details__text">${overview}</p>
+      <button class="button" type="button"></button>
+      <button class="button" type="button"></button>
+      <button class="button button-trailer" type="button">Show trailer</button>
     </div>`;
     this.modalContent.insertAdjacentHTML('beforeend', markup);
+
+    let trailerRun;
+    console.log(3333333333, video);
+    if (video) {
+        trailerRun = this.modalContent.querySelector('.button-trailer');
+        console.log(trailerRun)
+
+        trailerRun.addEventListener('click', () => {
+            console.log(12)
+        })
+    }
   }
 }
 
