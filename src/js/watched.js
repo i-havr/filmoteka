@@ -5,6 +5,7 @@ const APIKey = 'e0e51fe83e5367383559a53110fae0e8';
 const refs = {
   libraryList: document.querySelector('#library-list'),
   filmotekaList: document.querySelector('#filmoteka-list'),
+  filmotekaItem: document.querySelector('.filmoteka__item'),
   watchedBtn: document.querySelector('#watched-btn'),
   myLibLink: document.querySelector('#mylib-link'),
   queueBtn: document.querySelector('#queue-btn'),
@@ -15,9 +16,6 @@ const refs = {
 let GENRES = [0];
 
 // Слухачі подій
-// try {
-//   refs.filmotekaList.addEventListener('click', addWatched);
-// } catch (error) {}
 
 try {
   refs.modalCard.addEventListener('click', addWatched);
@@ -29,6 +27,11 @@ try {
 try {
   refs.queueBtn.addEventListener('click', removeLibraryListWatched);
 } catch (error) {}
+try {
+  refs.filmotekaList.addEventListener('click', openModal);
+} catch (error) {
+  console.log(error);
+}
 
 Start();
 async function Start() {
@@ -36,7 +39,7 @@ async function Start() {
 
   await checkWatched();
 
-  // await addLibraryListWatched();
+  await addLibraryListWatched();
 }
 
 // Формування переліку жанрів
@@ -60,6 +63,25 @@ async function checkWatched() {
   }
 }
 
+// ---------
+function openModal(event) {
+  console.log(refs.modalWatchedBtn);
+  console.log(watchedFilmId.includes(JSON.parse(event.path[3].dataset.id)));
+
+  if (watchedFilmId.includes(JSON.parse(event.path[3].dataset.id))) {
+    console.log(refs.modalWatchedBtn);
+    refs.modalWatchedBtn.textContent = 'remove Watched';
+    refs.modalWatchedBtn.classList.remove('modal__button');
+    refs.modalWatchedBtn.classList.add('modal__button--active');
+    return;
+  } else {
+    refs.modalWatchedBtn.textContent = 'add to Watched';
+    refs.modalWatchedBtn.classList.add('modal__button');
+    refs.modalWatchedBtn.classList.remove('modal__button--active');
+    return;
+  }
+}
+
 // Запис в LocalStorage
 async function addWatched(event) {
   if (
@@ -68,10 +90,34 @@ async function addWatched(event) {
   ) {
     return;
   }
-
-  console.log(event.target);
-  event.target.textContent = 'remove Watched';
   const movies = new Movies(APIKey);
+
+  if (event.target.classList[1] === 'modal__button--active') {
+    event.target.textContent = 'add to Watched';
+    event.target.classList.add('modal__button');
+    event.target.classList.remove('modal__button--active');
+
+    const namberFilm = watchedFilmId.indexOf(
+      JSON.parse(event.target.offsetParent.children[2].children[0].dataset.id)
+    );
+
+    console.log(namberFilm);
+    await watchedFilmId.splice(namberFilm, 1);
+    await watchedFilm.splice(namberFilm, 1);
+    await localStorage.removeItem('watchedId');
+    await localStorage.removeItem('watched');
+
+    await localStorage.setItem('watchedId', JSON.stringify(watchedFilmId));
+    await localStorage.setItem('watched', JSON.stringify(watchedFilm));
+    return;
+  }
+
+  if (event.target.offsetParent.children[2].children[0].dataset.id) {
+    event.target.textContent = 'remove Watched';
+    event.target.classList.remove('modal__button');
+    event.target.classList.add('modal__button--active');
+  }
+
   try {
     const film = await movies.getMovieDetails(
       event.target.offsetParent.children[2].children[0].dataset.id
@@ -101,9 +147,7 @@ async function addLibraryListWatched() {
     for (const film of watchedFilm) {
       try {
         refs.libraryList.insertAdjacentHTML('beforeend', markupCard(film));
-      } catch (error) {
-        console.log(error);
-      }
+      } catch (error) {}
     }
   }
 }
