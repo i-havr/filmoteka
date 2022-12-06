@@ -8,14 +8,21 @@ const refs = {
   watchedBtn: document.querySelector('#watched-btn'),
   myLibLink: document.querySelector('#mylib-link'),
   queueBtn: document.querySelector('#queue-btn'),
+  modalCard: document.querySelector('.modal'),
+  modalWatchedBtn: document.querySelector('#modal__watched-button'),
 };
 
 let GENRES = [0];
 
 // Слухачі подій
+// try {
+//   refs.filmotekaList.addEventListener('click', addWatched);
+// } catch (error) {}
+
 try {
-  refs.filmotekaList.addEventListener('click', addWatched);
+  refs.modalCard.addEventListener('click', addWatched);
 } catch (error) {}
+
 try {
   refs.watchedBtn.addEventListener('click', addLibraryListWatched);
 } catch (error) {}
@@ -29,7 +36,7 @@ async function Start() {
 
   await checkWatched();
 
-  await addLibraryListWatched();
+  // await addLibraryListWatched();
 }
 
 // Формування переліку жанрів
@@ -55,16 +62,22 @@ async function checkWatched() {
 
 // Запис в LocalStorage
 async function addWatched(event) {
-  if (event.target.nodeName !== 'IMG') {
+  if (
+    event.target.nodeName !== 'BUTTON' ||
+    event.target.id !== 'modal__watched-button'
+  ) {
     return;
   }
-  //   console.dir(event.target.parentElement.parentElement.attributes[1].value);
+
+  console.log(event.target);
+  event.target.textContent = 'remove Watched';
   const movies = new Movies(APIKey);
   try {
     const film = await movies.getMovieDetails(
-      event.target.parentElement.parentElement.attributes[1].value
+      event.target.offsetParent.children[2].children[0].dataset.id
     );
     if (!watchedFilmId.includes(film.id)) {
+      console.log(film);
       watchedFilmId.push(film.id);
       watchedFilm.push(film);
 
@@ -78,9 +91,11 @@ async function addWatched(event) {
 
 // Створення контенту My library watched
 async function addLibraryListWatched() {
-  refs.libraryList.innerHTML = '';
-  refs.watchedBtn.classList.add('button--active');
-  refs.queueBtn.classList.remove('button--active');
+  try {
+    refs.libraryList.innerHTML = '';
+    refs.watchedBtn.classList.add('button--active');
+    refs.queueBtn.classList.remove('button--active');
+  } catch (error) {}
 
   if (localStorage.getItem('watched')) {
     for (const film of watchedFilm) {
