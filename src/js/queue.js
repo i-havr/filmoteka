@@ -3,10 +3,10 @@ import { Movies } from './fetch';
 const APIKey = 'e0e51fe83e5367383559a53110fae0e8';
 
 const refs = {
-    modalQueueBtnAdd: document.querySelector('#modal__button-queue')
+    modal: document.querySelector('.modal')
 }
 try {
-    refs.modalQueueBtnAdd.addEventListener('click', addToQueue);
+    refs.modal.addEventListener('click', addToQueue);
 } catch (error) {
     console.log('error')
 }
