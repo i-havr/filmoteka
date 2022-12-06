@@ -1,3 +1,4 @@
+import { addLoadingSpinner, removeLoadingSpinner } from './loading-spinner';
 import { Movies } from './fetch';
 import clearFilmoteka from './clearFilmoteka';
 import { markupFilmoteka, getGenres } from './markup';
@@ -7,9 +8,12 @@ const APIKey = 'e0e51fe83e5367383559a53110fae0e8';
 Start();
 
 async function Start() {
-  await getGenres();
+  addLoadingSpinner();
 
+  await getGenres();
   await getMovies();
+
+  removeLoadingSpinner();
 }
 
 // Page from pagination
