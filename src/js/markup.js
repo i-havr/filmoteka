@@ -23,7 +23,7 @@ export function markupCard(imgObj) {
   return `<li class="grid__item filmoteka__item">
 			<div class="card" data-id="${imgObj.id}">
                 <div class="card__img">
-					<img src="${URI}" alt="${imgObj.title}">
+					<img src="${URI}" loading="lazy" alt="${imgObj.title}">
 				</div>
                     <div class="card__wrapper">
                         <h2 class="card__title title">${imgObj.title}</h2>

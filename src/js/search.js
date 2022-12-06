@@ -29,9 +29,11 @@ async function getMovies() {
     const { results } = await movies.searchMovies(searchValue);
 
     if (results.length === 0) {
-      throw new Error(
-        'Sorry, there are no movies matching your search query. Please try again.'
-      );
+      // throw new Error(
+      //   'Sorry, there are no movies matching your search query. Please try again.'
+      // );
+      onInvalidSearchQuery();
+      return;
     }
 
     clearFilmoteka();
@@ -41,4 +43,21 @@ async function getMovies() {
     console.log(error.name);
     console.log(error.message);
   }
+}
+
+function onInvalidSearchQuery() {
+  const notification = `<p class="search__info">
+          Search result was not successful. Please try another key word
+        </p>;`;
+  document
+    .querySelector('.search')
+    .insertAdjacentHTML('beforeend', notification);
+
+  const removeNotification = () => {
+    setTimeout(() => {
+      document.querySelector('.search__info').remove();
+    }, 3000);
+  };
+
+  removeNotification();
 }
