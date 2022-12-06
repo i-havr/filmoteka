@@ -4,26 +4,36 @@
   position: fixed;
   left: 50%;
   top: 50%;
-
+  z-index: 2000;
+  min-height: 476px;
+  @include mq(mob-only) {
+    max-width: 380px;
+    max-height: 100%;
+    width: 90%;
+    overflow-y: auto;
+  }
   padding: 48px 20px 40px;
-  width: 90%;
-  max-width: 380px;
-  max-height: 100%;
-  overflow-y: auto;
 
   background-color: #fff;
 
   transform: translate(-50%, -50%) scale(1);
   transition: transform var(--animation);
+  @include mq(tab) {
+    width: 704px;
+    padding: 40px 72px 40px 36px;
+  }
+  @include mq(desk) {
+    width: 806px;
+    height: 558px;
+    padding: 40px 12px 40px;
+  }
 
   .backdrop.is-hidden & {
     transform: translate(-50%, -50%) scale(0.9);
   }
 }
-
 .modal__close-btn {
   position: absolute;
-
   top: 8px;
   right: 8px;
   width: 30px;
@@ -33,7 +43,4 @@
   border: none;
   outline: none;
   cursor: pointer;
-}
-.modal__content {
-  margin-bottom: 20px;
 }
