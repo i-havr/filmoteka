@@ -1,10 +1,8 @@
 import { Movies } from './fetch';
-import { markupFilmoteka, getGenres } from './markup';
+import { markupFilmoteka, getGenres, APIKey } from './markup';
 import { addLoadingSpinner, removeLoadingSpinner } from './loading-spinner';
 import clearFilmoteka from './clearFilmoteka';
 import refs from './refs';
-
-const APIKey = 'e0e51fe83e5367383559a53110fae0e8';
 
 let searchValue = 'cat';
 
@@ -34,9 +32,11 @@ async function getMovies() {
     const { results } = await movies.searchMovies(searchValue);
 
     if (results.length === 0) {
-      throw new Error(
-        'Sorry, there are no movies matching your search query. Please try again.'
-      );
+      // throw new Error(
+      //   'Sorry, there are no movies matching your search query. Please try again.'
+      // );
+      onInvalidSearchQuery();
+      return;
     }
 
     clearFilmoteka();
@@ -46,4 +46,18 @@ async function getMovies() {
     console.log(error.name);
     console.log(error.message);
   }
+}
+
+function onInvalidSearchQuery() {
+  const notification = document.querySelector('#message');
+
+  notification.classList.remove('is-hidden');
+
+  const removeNotification = () => {
+    setTimeout(() => {
+      notification.classList.add('is-hidden');
+    }, 3000);
+  };
+
+  removeNotification();
 }
