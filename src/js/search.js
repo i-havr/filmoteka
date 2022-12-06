@@ -46,16 +46,13 @@ async function getMovies() {
 }
 
 function onInvalidSearchQuery() {
-  const notification = `<p class="search__info">
-          Search result was not successful. Please try another key word
-        </p>;`;
-  document
-    .querySelector('.search')
-    .insertAdjacentHTML('beforeend', notification);
+  const notification = document.querySelector('#message');
+
+  notification.classList.remove('is-hidden');
 
   const removeNotification = () => {
     setTimeout(() => {
-      document.querySelector('.search__info').remove();
+      notification.classList.add('is-hidden');
     }, 3000);
   };
 

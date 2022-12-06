@@ -8,6 +8,7 @@ import './js/search';
 import './js/pagination';
 import './js/watched';
 import './js/arrow-up';
+import './js/theme';
 
 const APIKey = 'e0e51fe83e5367383559a53110fae0e8';
 

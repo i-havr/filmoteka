@@ -4,26 +4,6 @@ import { markupFilmoteka, getGenres } from './markup';
 
 const APIKey = 'e0e51fe83e5367383559a53110fae0e8';
 
-<<<<<<< Updated upstream
-=======
-const refs = {
-  searchForm: document.querySelector('#search-form'),
-  filmotekaList: document.querySelector('#filmoteka-list'),
-};
-
-let GENRES = [0];
-let searchValue = 'cat';
-
-refs.searchForm.addEventListener('submit', onSubmitForm);
-
-function onSubmitForm(evt) {
-  evt.preventDefault();
-  searchValue = evt.currentTarget.elements.searchQuery.value;
-  clearFilmoteka();
-  Start();
-}
-
->>>>>>> Stashed changes
 Start();
 
 async function Start() {
@@ -37,14 +17,8 @@ export async function getMovies(page) {
   const movies = new Movies(APIKey);
 
   try {
-<<<<<<< Updated upstream
     const { results } = await movies.getTrendingMovies(page);
     console.log('results ', results);
-=======
-    // const moviesArr = await movies.getTrendingMovies();
-    const moviesArr = await movies.searchMovies(searchValue);
-    console.log('moviesArr ', moviesArr);
->>>>>>> Stashed changes
 
     if (results.length === 0) {
       throw new Error(
