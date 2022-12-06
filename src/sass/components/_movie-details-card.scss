@@ -36,6 +36,10 @@
 .movie-details__content {
   margin-bottom: 20px;
 }
+.movie-details__img {
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
 .movie-details__title {
   margin-bottom: 20px;
   font-style: normal;
@@ -43,6 +47,7 @@
   font-size: 20px;
   line-height: 1.15;
   text-transform: uppercase;
+
   @include mq(desk) {
     font-size: 30px;
     line-height: 1.17;
@@ -68,37 +73,25 @@
   color: #8c8c8c;
 }
 .movie-details__vote {
+  display: inline-block;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 5px;
+  padding-right: 5px;
   width: 36px;
-  height: 16px;
+
+  background: #f7f7f7;
+  color: #000000;
+  border-radius: 5px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.1;
+  text-align: center;
+}
+.movie-details__vote--average {
   background: #ff6b01;
   color: #fff;
-  border-radius: 5px;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 1.1;
-
-  display: inline-flex;
-  align-items: center;
-  text-align: center;
-  text-transform: uppercase;
-}
-.movie-details__votes {
-  width: 36px;
-  height: 16px;
-  background: #f7f7f7;
-  border-radius: 5px;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 1.1;
-
-  display: inline-flex;
-  align-items: center;
-  text-align: center;
-  text-transform: uppercase;
-
-  color: #000000;
 }
 .movie-details__value {
   padding: 4px 0 4px;

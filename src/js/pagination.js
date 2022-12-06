@@ -2,7 +2,6 @@ import Pagination from 'tui-pagination';
 import 'tui-pagination/dist/tui-pagination.css';
 import { getMovies } from './gallery';
 import moveUp from './move-up';
-const getMovies = getMovies();
 
 const container = document.getElementById('pagination');
 

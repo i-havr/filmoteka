@@ -10,9 +10,9 @@
     max-width: 380px;
     max-height: 100%;
     width: 90%;
+    overflow-y: auto;
   }
   padding: 48px 20px 40px;
-  overflow-y: auto;
 
   background-color: #fff;
 
@@ -32,10 +32,8 @@
     transform: translate(-50%, -50%) scale(0.9);
   }
 }
-
 .modal__close-btn {
   position: absolute;
-
   top: 8px;
   right: 8px;
   width: 30px;
