@@ -1,3 +1,4 @@
+import { addLoadingSpinner, removeLoadingSpinner } from './loading-spinner';
 import { Movies } from './fetch';
 import clearFilmoteka from './clearFilmoteka';
 import { markupFilmoteka, getGenres } from './markup';
@@ -19,9 +20,12 @@ function onSubmitForm(evt) {
 Start();
 
 async function Start() {
-  await getGenres();
+  addLoadingSpinner();
 
+  await getGenres();
   await getMovies();
+
+  removeLoadingSpinner();
 }
 
 // Page from pagination
@@ -31,11 +35,6 @@ export async function getMovies(page) {
   try {
     const { results } = await movies.getTrendingMovies(page);
     console.log('results ', results);
-
-    // const moviesArr = await movies.getTrendingMovies();
-    //     const moviesArr = await movies.searchMovies(searchValue);
-    //     console.log('moviesArr ', moviesArr);
-    // >>>>>>> Stashed changes
 
     if (results.length === 0) {
       throw new Error(

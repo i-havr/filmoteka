@@ -20,7 +20,7 @@ export function markupCard(imgObj) {
 
   const genres = markupGenres(imgObj.genre_ids);
 
-  return `<li class="grid__item filmoteka__item">
+  return `<li class="grid__item filmoteka__item" data-id="${imgObj.id}">
 			<div class="card" data-id="${imgObj.id}">
                 <div class="card__img">
 					<img src="${URI}" loading="lazy" alt="${imgObj.title}">

@@ -1,5 +1,6 @@
 import { Movies } from './fetch';
 import { markupFilmoteka, getGenres } from './markup';
+import { addLoadingSpinner, removeLoadingSpinner } from './loading-spinner';
 import clearFilmoteka from './clearFilmoteka';
 import refs from './refs';
 
@@ -13,6 +14,8 @@ function onSubmitForm(evt) {
   evt.preventDefault();
   searchValue = evt.currentTarget.elements.searchQuery.value;
   clearFilmoteka();
+  addLoadingSpinner();
+
   Start();
 }
 
@@ -20,6 +23,8 @@ async function Start() {
   await getGenres();
 
   await getMovies();
+
+  removeLoadingSpinner();
 }
 
 async function getMovies() {
