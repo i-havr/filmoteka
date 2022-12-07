@@ -1,9 +1,11 @@
 import { Movies } from './fetch';
 import { APIKey } from './markup';
+const bodyScrollLock = require('body-scroll-lock');
+import getElement from './read-more';
 
 export default class ModalMovie {
   constructor(
-    { container, btnClose, openModal, modalContent },
+    { container, btnClose, openModal, modalContent, backdrop },
     IMAGE_URL,
     APIKey
   ) {
@@ -35,6 +37,9 @@ export default class ModalMovie {
     this.openModal.classList.remove('is-hidden');
     const movieId = e.target.closest('.filmoteka__item').dataset.id;
     this.getMovieDetals(movieId);
+    bodyScrollLock.disableBodyScroll(document.body);
+
+
   }
 
   getMovieDetals(movie) {
@@ -56,6 +61,7 @@ export default class ModalMovie {
   onCloseModal() {
     this.openModal.classList.add('is-hidden');
     this.modalContent.innerHTML = '';
+    bodyScrollLock.enableBodyScroll(document.body);
   }
 
   onMarkup(data) {
