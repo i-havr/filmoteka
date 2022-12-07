@@ -171,3 +171,5 @@ const refs = {
 };
 
 new ModalMovie(refs, IMAGE_URL, APIKey).init();
+
+// Привіт я тут просто так
