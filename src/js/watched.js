@@ -27,11 +27,6 @@ try {
 try {
   refs.queueBtn.addEventListener('click', removeLibraryListWatched);
 } catch (error) {}
-// try {
-//   refs.filmotekaList.addEventListener('click', openModal);
-// } catch (error) {
-//   console.log(error);
-// }
 
 Start();
 async function Start() {
@@ -157,7 +152,7 @@ function markupCard(imgObj) {
   const date = new Date(imgObj.release_date);
   const genres = markupGenres(imgObj.genres);
 
-  return `<li class="grid__item filmoteka__item">
+  return `<li class="grid__item filmoteka__item" data-id="${imgObj.id}">
 			<div class="card" data-id="${imgObj.id}">
                 <div class="card__img">
 					<img src="${URI}" alt="${imgObj.title}">
