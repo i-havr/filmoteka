@@ -138,7 +138,11 @@ export default class ModalMovie {
     const markup = `
     <div class="movie-details__preview-wrapper" data-id="${id}">
         <img class="movie-details__img" src="${img}"/>
-        ${!video ? '<button class="button movie-details__button-trailer modal__button" data-trailer type="button">Show trailer</button>' : undefined}
+        ${
+          video
+            ? '<button class="button movie-details__button-trailer modal__button" data-trailer type="button">Show trailer</button>'
+            : ''
+        }
     </div>
     <div class="movie-details__thumb">
     <div class="movie-details__content"><h3 class="movie-details__title">${title}</h3>
