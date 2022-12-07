@@ -1,6 +1,6 @@
 import Pagination from 'tui-pagination';
 // import 'tui-pagination/dist/tui-pagination.css';
-import { getMovies } from './gallery';
+import { getTrendMovies } from './gallery';
 // import { getMovies1 } from './search';
 import moveUp from './move-up';
 import refs from './refs';
@@ -48,7 +48,7 @@ export async function updateMoviesList(event) {
 
   console.log('currentPageStart -->', currentPageStart);
 
-  await getMovies(currentPageStart);
+  await getTrendMovies(currentPageStart);
 
   moveUp();
 }
