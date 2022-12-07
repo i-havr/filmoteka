@@ -159,7 +159,8 @@ export default class ModalMovie {
     <p class="movie-details__text">${overview}</p></div>
     <div class="movie-details__buttons">
     <button class="button modal__button" type="button" id="modal__watched-button">Add to Watched</button>
-    <button id="modal__button-queue" class="button" type="button">Add to Queue</button>
+    <button id="modal__button-queue" class="button modal__button" type="button">Add to Queue</button>
+    <button class="button" type="button"></button>
     </div>
     </div>
     `;
