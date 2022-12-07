@@ -136,10 +136,9 @@ export default class ModalMovie {
     popularity = popularity.toFixed(1);
 
     const markup = `
-    <div data-id="${id}"><img class="movie-details__img" src="${img}"/></div>
     <div class="movie-details__preview-wrapper" data-id="${id}">
-        <img class="movie-details__img" src="${IMAGE_URL}${poster_path}"/>
-        ${video ? '<button class="button movie-details__button-trailer" data-trailer type="button">Show trailer</button>' : undefined}
+        <img class="movie-details__img" src="${img}"/>
+        ${!video ? '<button class="button movie-details__button-trailer modal__button" data-trailer type="button">Show trailer</button>' : undefined}
     </div>
     <div class="movie-details__thumb">
     <div class="movie-details__content"><h3 class="movie-details__title">${title}</h3>
@@ -157,7 +156,6 @@ export default class ModalMovie {
     <div class="movie-details__buttons">
     <button class="button modal__button" type="button" id="modal__watched-button">Add to Watched</button>
     <button id="modal__button-queue" class="button" type="button">Add to Queue</button>
-    <button class="button" type="button"></button>
     </div>
     </div>
     `;
