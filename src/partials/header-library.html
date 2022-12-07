@@ -1,28 +1,42 @@
 <header id="header" class="header header--mylib">
-    <div class="header__section">
-        <div class="container header__container">
-            <nav class="navigation">
-                <a class="link logo" href="./index.html">
-                    <img class="logo__icon" src="./images/logo.svg" alt="Filmoteka">
-                    <span class="logo__text">Filmoteka</span>
-                </a>
+  <div class="header__section">
+    <div class="container header__container">
+      <nav class="navigation">
+        <a class="link logo" href="./index.html">
+          <img class="logo__icon" src="./images/logo.svg" alt="Filmoteka" />
+          <span class="logo__text">Filmoteka</span>
+        </a>
 
-                <ul class="list navigation__list">
-                    <li class="navigation__item">
-                        <a id="home-link" class="link navigation__link " href="./index.html">Home</a>
-                    </li>
-                    <li class="navigation-item">
-                        <a id="mylib-link" class="link navigation__link navigation__link--current"
-                            href="./library.html">My
-                            library</a>
-                    </li>
-                </ul>
-            </nav>
+        <ul class="list navigation__list">
+          <li class="navigation__item">
+            <a id="home-link" class="link navigation__link" href="./index.html"
+              >Home</a
+            >
+          </li>
+          <li class="navigation-item">
+            <a
+              id="mylib-link"
+              class="link navigation__link navigation__link--current"
+              href="./library.html"
+              >My library</a
+            >
+          </li>
+          <li><button class="theme-btn" id="toggle-theme-btn">🌙</button></li>
+        </ul>
+      </nav>
 
-            <div class="header__wrapper" id="mylib-btns">
-                <button id="watched-btn" class="button button--active header__button" type="button">Watched</button>
-                <button id="queue-btn" class="button header__button" type="button">queue</button>
-            </div>
-        </div>
+      <div class="header__wrapper" id="mylib-btns">
+        <button
+          id="watched-btn"
+          class="button button--active header__button"
+          type="button"
+        >
+          Watched
+        </button>
+        <button id="queue-btn" class="button header__button" type="button">
+          queue
+        </button>
+      </div>
     </div>
+  </div>
 </header>
