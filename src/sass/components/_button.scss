@@ -38,13 +38,29 @@
   }
 }
 
+.modal__button {
+  color: var(--main-font-color);
+  border-color: var(--main-dark-color);
+
+  &:hover,
+  :focus {
+    color: var(--main-light-color);
+  }
+
+  &--active {
+    color: var(--main-light-color);
+    border-color: var(--main-accent-color);
+    background-color: var(--main-accent-color);
+    box-shadow: var(--btn-box-shadow);
+  }
+}
 #modal__button-queue {
-    color: var(--main-font-color);
-    border-color: var(--main-dark-color);
-  
-    &:hover,
-    :focus {
-      color: var(--main-light-color);
-      border-color: var(--main-accent-color);
-    }
+  color: var(--main-font-color);
+  border-color: var(--main-dark-color);
+
+  &:hover,
+  :focus {
+    color: var(--main-light-color);
+    border-color: var(--main-accent-color);
+  }
 }

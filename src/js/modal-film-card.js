@@ -3,12 +3,19 @@ import * as basicLightbox from 'basiclightbox';
 import 'basiclightbox/dist/basiclightbox.min.css';
 import { APIKey } from './markup';
 const bodyScrollLock = require('body-scroll-lock');
-import foto from '../images/poster/poster-not-found-desk.jpg'
-
+import foto from '../images/poster/poster-not-found-desk.jpg';
 
 export default class ModalMovie {
   constructor(
-    { containerMain, containerMyLib, btnClose, openModal, modalContent, backdrop, header },
+    {
+      containerMain,
+      containerMyLib,
+      btnClose,
+      openModal,
+      modalContent,
+      backdrop,
+      header,
+    },
     IMAGE_URL,
     APIKey
   ) {
@@ -26,15 +33,21 @@ export default class ModalMovie {
     this.addEventListeners();
   }
   addEventListeners() {
-    const isHeaderMain = refs.header.classList.contains('header--home')
+    const isHeaderMain = refs.header.classList.contains('header--home');
     if (isHeaderMain) {
       this.containerMain.addEventListener('click', this.onOpenModal.bind(this));
     } else {
-      this.containerMyLib.addEventListener('click', this.onOpenModal.bind(this));
+      this.containerMyLib.addEventListener(
+        'click',
+        this.onOpenModal.bind(this)
+      );
     }
 
     this.btnClose.addEventListener('click', this.onCloseModal.bind(this));
-    this.backdrop.addEventListener('click', this.toCloseModalClickBackdrop.bind(this));
+    this.backdrop.addEventListener(
+      'click',
+      this.toCloseModalClickBackdrop.bind(this)
+    );
   }
 
   async fetchMovie(movie) {
@@ -50,9 +63,12 @@ export default class ModalMovie {
     const movieId = e.target.closest('.filmoteka__item').dataset.id;
     this.getMovieDetals(movieId);
     bodyScrollLock.disableBodyScroll(document.body);
-    const isBackdrop = !this.backdrop.classList.contains('is-hidden')
+    const isBackdrop = !this.backdrop.classList.contains('is-hidden');
     if (isBackdrop) {
-      window.addEventListener('keydown', this.toCloseModalClickEscape.bind(this));
+      window.addEventListener(
+        'keydown',
+        this.toCloseModalClickEscape.bind(this)
+      );
     }
   }
 
@@ -71,13 +87,16 @@ export default class ModalMovie {
     const isEscape = e.code === 'Escape';
     if (isEscape) {
       this.onCloseModal();
-      window.removeEventListener('keydown', this.toCloseModalClickEscape.bind(this));
+      window.removeEventListener(
+        'keydown',
+        this.toCloseModalClickEscape.bind(this)
+      );
     }
   }
   toCloseModalClickBackdrop(e) {
     const isClickBackdrop = e.target === this.backdrop;
     if (isClickBackdrop) {
-      this.onCloseModal()
+      this.onCloseModal();
     }
   }
   onCloseModal() {
@@ -106,12 +125,11 @@ export default class ModalMovie {
     //   console.log(text);
     //   console.log(overview);
     // }
-    let img = `${this.IMAGE_URL}${poster_path}`
+    let img = `${this.IMAGE_URL}${poster_path}`;
 
     if (poster_path === null) {
       img = foto;
     }
-    console.log(img);
 
     genres = genres.map(item => item.name).join(', ');
     vote_average = vote_average.toFixed(1);
@@ -133,7 +151,7 @@ export default class ModalMovie {
     <h4 class="movie-details__about">ABOUT</h4>
     <p class="movie-details__text">${overview}</p></div>
     <div class="movie-details__buttons">
-    <button class="button" type="button"></button>
+    <button class="button modal__button" type="button" id="modal__watched-button">Add to Watched</button>
     <button id="modal__button-queue" class="button" type="button">Add to Queue</button>
     <button class="button" type="button"></button>
     </div>
@@ -177,5 +195,3 @@ const refs = {
 };
 
 new ModalMovie(refs, IMAGE_URL, APIKey).init();
-
-
