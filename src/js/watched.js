@@ -10,7 +10,7 @@ const refs = {
   myLibLink: document.querySelector('#mylib-link'),
   queueBtn: document.querySelector('#queue-btn'),
   modalCard: document.querySelector('.modal'),
-  modalWatchedBtn: document.querySelector('#modal__watched-button'),
+  modalContent: document.querySelector('.modal__content'),
 };
 
 let GENRES = [0];
@@ -27,11 +27,11 @@ try {
 try {
   refs.queueBtn.addEventListener('click', removeLibraryListWatched);
 } catch (error) {}
-try {
-  refs.filmotekaList.addEventListener('click', openModal);
-} catch (error) {
-  console.log(error);
-}
+// try {
+//   refs.filmotekaList.addEventListener('click', openModal);
+// } catch (error) {
+//   console.log(error);
+// }
 
 Start();
 async function Start() {
@@ -64,23 +64,24 @@ async function checkWatched() {
 }
 
 // ---------
-function openModal(event) {
-  console.log(refs.modalWatchedBtn);
-  console.log(watchedFilmId.includes(JSON.parse(event.path[3].dataset.id)));
+// async function openModal(event) {
+//   console.log(watchedFilmId.includes(JSON.parse(event.path[3].dataset.id)));
+//   const modalWatchedBtn = document.querySelector('#modal__watched-button');
+//   console.dir(refs.modalContent.children[2]);
 
-  if (watchedFilmId.includes(JSON.parse(event.path[3].dataset.id))) {
-    console.log(refs.modalWatchedBtn);
-    refs.modalWatchedBtn.textContent = 'remove Watched';
-    refs.modalWatchedBtn.classList.remove('modal__button');
-    refs.modalWatchedBtn.classList.add('modal__button--active');
-    return;
-  } else {
-    refs.modalWatchedBtn.textContent = 'add to Watched';
-    refs.modalWatchedBtn.classList.add('modal__button');
-    refs.modalWatchedBtn.classList.remove('modal__button--active');
-    return;
-  }
-}
+//   if (watchedFilmId.includes(JSON.parse(event.path[3].dataset.id))) {
+//     console.log(modalWatchedBtn);
+//     refs.modalWatchedBtn.textContent = 'remove Watched';
+//     refs.modalWatchedBtn.classList.remove('modal__button');
+//     refs.modalWatchedBtn.classList.add('modal__button--active');
+//     return;
+//   } else {
+//     refs.modalWatchedBtn.textContent = 'add to Watched';
+//     refs.modalWatchedBtn.classList.add('modal__button');
+//     refs.modalWatchedBtn.classList.remove('modal__button--active');
+//     return;
+//   }
+// }
 
 // Запис в LocalStorage
 async function addWatched(event) {
@@ -101,7 +102,6 @@ async function addWatched(event) {
       JSON.parse(event.target.offsetParent.children[2].children[0].dataset.id)
     );
 
-    console.log(namberFilm);
     await watchedFilmId.splice(namberFilm, 1);
     await watchedFilm.splice(namberFilm, 1);
     await localStorage.removeItem('watchedId');
@@ -123,7 +123,6 @@ async function addWatched(event) {
       event.target.offsetParent.children[2].children[0].dataset.id
     );
     if (!watchedFilmId.includes(film.id)) {
-      console.log(film);
       watchedFilmId.push(film.id);
       watchedFilm.push(film);
 

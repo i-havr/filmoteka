@@ -75,7 +75,7 @@ export default class ModalMovie {
     vote_average = vote_average.toFixed(1);
     popularity = popularity.toFixed(1);
     const markup = `
-    <div><img class="movie-details__img" src="${IMAGE_URL}${poster_path}"/></div>
+    <div data-id="${id}"><img class="movie-details__img" src="${IMAGE_URL}${poster_path}"/></div>
     <div class="movie-details__thumb">
     <div class="movie-details__content"><h3 class="movie-details__title">${title}</h3>
     <table><tbody class="table"><tr>
