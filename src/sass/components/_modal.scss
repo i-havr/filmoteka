@@ -14,7 +14,7 @@
   }
   padding: 48px 20px 40px;
 
-  background-color: #fff;
+  background-color: var(--modal-bg-color);
 
   transform: translate(-50%, -50%) scale(1);
   transition: transform var(--animation);
@@ -39,7 +39,8 @@
   width: 30px;
   height: 30px;
   padding: 0;
-  background-color: transparent;
+  background-color: white;
+  border-radius: 50%;
   border: none;
   outline: none;
   cursor: pointer;
