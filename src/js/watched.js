@@ -27,9 +27,6 @@ try {
 try {
   refs.queueBtn.addEventListener('click', removeLibraryListWatched);
 } catch (error) {}
-try {
-  refs.modalCloseBtn.addEventListener('click', addLibraryListWatched);
-} catch (error) {}
 
 createWatched();
 async function createWatched() {
