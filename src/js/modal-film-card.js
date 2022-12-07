@@ -1,5 +1,6 @@
 import { Movies } from './fetch';
 import { APIKey } from './markup';
+import createBtnWatched from './create-btn-watched';
 
 export default class ModalMovie {
   constructor(
@@ -97,6 +98,8 @@ export default class ModalMovie {
     </div>
     `;
     this.modalContent.insertAdjacentHTML('beforeend', markup);
+
+    createBtnWatched(id);
   }
 }
 

@@ -11,6 +11,7 @@ const refs = {
   queueBtn: document.querySelector('#queue-btn'),
   modalCard: document.querySelector('.modal'),
   modalContent: document.querySelector('.modal__content'),
+  modalCloseBtn: document.querySelector('.modal__close-btn'),
 };
 
 let GENRES = [0];
@@ -20,22 +21,19 @@ let GENRES = [0];
 try {
   refs.modalCard.addEventListener('click', addWatched);
 } catch (error) {}
-
 try {
   refs.watchedBtn.addEventListener('click', addLibraryListWatched);
 } catch (error) {}
 try {
   refs.queueBtn.addEventListener('click', removeLibraryListWatched);
 } catch (error) {}
-// try {
-//   refs.filmotekaList.addEventListener('click', openModal);
-// } catch (error) {
-//   console.log(error);
-// }
+try {
+  refs.modalCloseBtn.addEventListener('click', addLibraryListWatched);
+} catch (error) {}
 
-Start();
-async function Start() {
-  await getGenres();
+createWatched();
+async function createWatched() {
+  await createGenres();
 
   await checkWatched();
 
@@ -43,11 +41,10 @@ async function Start() {
 }
 
 // Формування переліку жанрів
-async function getGenres() {
+async function createGenres() {
   const movies = new Movies(APIKey);
   try {
     GENRES = await movies.getGenres();
-    console.log('GENRES ', GENRES);
   } catch (error) {
     console.log(error.message);
   }
@@ -62,26 +59,6 @@ async function checkWatched() {
     watchedFilmId = JSON.parse(localStorage.getItem('watchedId'));
   }
 }
-
-// ---------
-// async function openModal(event) {
-//   console.log(watchedFilmId.includes(JSON.parse(event.path[3].dataset.id)));
-//   const modalWatchedBtn = document.querySelector('#modal__watched-button');
-//   console.dir(refs.modalContent.children[2]);
-
-//   if (watchedFilmId.includes(JSON.parse(event.path[3].dataset.id))) {
-//     console.log(modalWatchedBtn);
-//     refs.modalWatchedBtn.textContent = 'remove Watched';
-//     refs.modalWatchedBtn.classList.remove('modal__button');
-//     refs.modalWatchedBtn.classList.add('modal__button--active');
-//     return;
-//   } else {
-//     refs.modalWatchedBtn.textContent = 'add to Watched';
-//     refs.modalWatchedBtn.classList.add('modal__button');
-//     refs.modalWatchedBtn.classList.remove('modal__button--active');
-//     return;
-//   }
-// }
 
 // Запис в LocalStorage
 async function addWatched(event) {
