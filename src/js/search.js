@@ -15,8 +15,11 @@ import {
 // *********************************************
 
 let searchValue = 'cat';
+const isHeaderMain = refs.header.classList.contains('header--home');
+if (isHeaderMain) {
+  refs.searchForm.addEventListener('submit', onSubmitForm);
+}
 
-refs.searchForm.addEventListener('submit', onSubmitForm);
 
 function onSubmitForm(evt) {
   evt.preventDefault();
