@@ -127,7 +127,6 @@ export default class ModalMovie {
     if (poster_path === null) {
       img = foto;
     }
-    console.log(img);
 
     genres = genres.map(item => item.name).join(', ');
     vote_average = vote_average.toFixed(1);
