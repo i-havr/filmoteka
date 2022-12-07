@@ -44,7 +44,7 @@ async function getMovies1(page) {
       page
     );
 
-    paginTest(total_results);
+    await getPaginationBySearch(total_results);
 
     if (results.length === 0) {
       // throw new Error(
@@ -79,7 +79,7 @@ function onInvalidSearchQuery() {
 
 // ************************************************
 
-function paginTest(total_results) {
+async function getPaginationBySearch(total_results) {
   const paginationOptions = makePaginationOptions(total_results);
 
   paginationStart.off('afterMove', updateMoviesList);
