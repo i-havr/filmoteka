@@ -1,4 +1,6 @@
 import { Movies } from './fetch';
+import * as basicLightbox from 'basiclightbox';
+import 'basiclightbox/dist/basiclightbox.min.css';
 import { APIKey } from './markup';
 import createBtnWatched from './create-btn-watched';
 const bodyScrollLock = require('body-scroll-lock');
@@ -114,6 +116,7 @@ export default class ModalMovie {
       original_title,
       genres,
       overview,
+      video,
       id,
     } = data;
     // console.log(overview.length);
@@ -134,7 +137,14 @@ export default class ModalMovie {
     popularity = popularity.toFixed(1);
 
     const markup = `
-    <div data-id="${id}"><img class="movie-details__img" src="${img}"/></div>
+    <div class="movie-details__preview-wrapper" data-id="${id}">
+        <img class="movie-details__img" src="${img}"/>
+        ${
+          video
+            ? '<button class="button movie-details__button-trailer modal__button" data-trailer type="button">Show trailer</button>'
+            : ''
+        }
+    </div>
     <div class="movie-details__thumb">
     <div class="movie-details__content"><h3 class="movie-details__title">${title}</h3>
     <table><tbody class="table"><tr>
@@ -151,13 +161,33 @@ export default class ModalMovie {
     <div class="movie-details__buttons">
     <button class="button modal__button" type="button" id="modal__watched-button">Add to Watched</button>
     <button id="modal__button-queue" class="button" type="button">Add to Queue</button>
-    <button class="button" type="button"></button>
     </div>
     </div>
     `;
     this.modalContent.insertAdjacentHTML('beforeend', markup);
 
     createBtnWatched(id);
+
+    if (video) {
+      this.startListenTrailerClick(id);
+    }
+  }
+
+  startListenTrailerClick(id) {
+    const trailerRun = this.modalContent.querySelector('[data-trailer]');
+
+    trailerRun.addEventListener('click', async () => {
+      const movies = new Movies(this.APIKey);
+      const { results } = await movies.getMovieTrailers(id);
+
+      const youTubeVideo = results.find(vid => vid.site === 'YouTube');
+
+      const instance = basicLightbox.create(`
+        <iframe src="https://www.youtube.com/embed/${youTubeVideo.key}" width="560" height="315" frameborder="0"></iframe>
+      `);
+
+      instance.show();
+    });
   }
 }
 
@@ -174,3 +204,5 @@ const refs = {
 };
 
 new ModalMovie(refs, IMAGE_URL, APIKey).init();
+
+// Привіт я тут просто так
