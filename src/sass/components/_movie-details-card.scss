@@ -103,7 +103,7 @@
   align-items: center;
   text-transform: uppercase;
 
-  color: #000000;
+  color: var(--main-font-color);
 }
 .movie-details__genres {
   padding: 4px 0 4px;
@@ -115,7 +115,7 @@
   display: flex;
   align-items: center;
 
-  color: #000000;
+  color: var(--main-font-color);
 }
 table {
   margin-bottom: 20px;

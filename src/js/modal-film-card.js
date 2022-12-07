@@ -1,18 +1,31 @@
 import { Movies } from './fetch';
-import { APIKey } from './markup';
 import * as basicLightbox from 'basiclightbox';
-import "basiclightbox/dist/basiclightbox.min.css";
+import 'basiclightbox/dist/basiclightbox.min.css';
+import { APIKey } from './markup';
+const bodyScrollLock = require('body-scroll-lock');
+import foto from '../images/poster/poster-not-found-desk.jpg';
 
 export default class ModalMovie {
   constructor(
-    { container, btnClose, openModal, modalContent },
+    {
+      containerMain,
+      containerMyLib,
+      btnClose,
+      openModal,
+      modalContent,
+      backdrop,
+      header,
+    },
     IMAGE_URL,
     APIKey
   ) {
-    this.container = container;
+    this.containerMain = containerMain;
+    this.containerMyLib = containerMyLib;
     this.btnClose = btnClose;
     this.openModal = openModal;
     this.modalContent = modalContent;
+    this.backdrop = backdrop;
+    this.header = header;
     this.IMAGE_URL = IMAGE_URL;
     this.APIKey = APIKey;
   }
@@ -20,9 +33,21 @@ export default class ModalMovie {
     this.addEventListeners();
   }
   addEventListeners() {
-    this.container.addEventListener('click', this.onOpenModal.bind(this));
+    const isHeaderMain = refs.header.classList.contains('header--home');
+    if (isHeaderMain) {
+      this.containerMain.addEventListener('click', this.onOpenModal.bind(this));
+    } else {
+      this.containerMyLib.addEventListener(
+        'click',
+        this.onOpenModal.bind(this)
+      );
+    }
+
     this.btnClose.addEventListener('click', this.onCloseModal.bind(this));
-    window.addEventListener('keydown', this.onEscape.bind(this));
+    this.backdrop.addEventListener(
+      'click',
+      this.toCloseModalClickBackdrop.bind(this)
+    );
   }
 
   async fetchMovie(movie) {
@@ -37,30 +62,50 @@ export default class ModalMovie {
     this.openModal.classList.remove('is-hidden');
     const movieId = e.target.closest('.filmoteka__item').dataset.id;
     this.getMovieDetals(movieId);
+    bodyScrollLock.disableBodyScroll(document.body);
+    const isBackdrop = !this.backdrop.classList.contains('is-hidden');
+    if (isBackdrop) {
+      window.addEventListener(
+        'keydown',
+        this.toCloseModalClickEscape.bind(this)
+      );
+    }
   }
 
   getMovieDetals(movie) {
     this.fetchMovie(movie)
       .then(data => {
-        this.onMarkup(data);
+        this.onMakeMarkup(data);
       })
       .catch(error => {
-        console.log(error);
+        console.log(error.name);
+        console.log(error.message);
       });
   }
-  onEscape(e) {
+
+  toCloseModalClickEscape(e) {
     const isEscape = e.code === 'Escape';
     if (isEscape) {
       this.onCloseModal();
-      window.removeEventListener('keydown', this.onEscape.bind(this));
+      window.removeEventListener(
+        'keydown',
+        this.toCloseModalClickEscape.bind(this)
+      );
+    }
+  }
+  toCloseModalClickBackdrop(e) {
+    const isClickBackdrop = e.target === this.backdrop;
+    if (isClickBackdrop) {
+      this.onCloseModal();
     }
   }
   onCloseModal() {
     this.openModal.classList.add('is-hidden');
     this.modalContent.innerHTML = '';
+    bodyScrollLock.enableBodyScroll(document.body);
   }
 
-  onMarkup(data) {
+  onMakeMarkup(data) {
     let {
       poster_path,
       title,
@@ -71,14 +116,28 @@ export default class ModalMovie {
       genres,
       overview,
       video,
-      id
+      id,
     } = data;
+    // console.log(overview.length);
+    // let text = '';
+    // if (overview.length > 300) {
+    //   text = overview.slice(0, 300);
+    //   console.log(text);
+    //   console.log(overview);
+    // }
+    let img = `${this.IMAGE_URL}${poster_path}`;
+
+    if (poster_path === null) {
+      img = foto;
+    }
 
     genres = genres.map(item => item.name).join(', ');
     vote_average = vote_average.toFixed(1);
     popularity = popularity.toFixed(1);
+
     const markup = `
-    <div class="movie-details__preview-wrapper">
+    <div data-id="${id}"><img class="movie-details__img" src="${img}"/></div>
+    <div class="movie-details__preview-wrapper" data-id="${id}">
         <img class="movie-details__img" src="${IMAGE_URL}${poster_path}"/>
         ${video ? '<button class="button movie-details__button-trailer" data-trailer type="button">Show trailer</button>' : undefined}
     </div>
@@ -91,13 +150,13 @@ export default class ModalMovie {
     </tr><tr>
       <td class="movie-details__name">Original Title</td><td class="movie-details__value">${original_title}</td>
     </tr><tr>
-      <td class="movie-details__name">Genre</td><td class="movie-details__genres">${genres}</td>
+      <td class="movie-details__name">Genres</td><td class="movie-details__genres">${genres}</td>
     </tr></tbody></table>
     <h4 class="movie-details__about">ABOUT</h4>
     <p class="movie-details__text">${overview}</p></div>
     <div class="movie-details__buttons">
-    <button class="button" type="button"></button>
-    <button class="button" type="button"></button>
+    <button class="button modal__button" type="button" id="modal__watched-button">Add to Watched</button>
+    <button id="modal__button-queue" class="button" type="button">Add to Queue</button>
     <button class="button" type="button"></button>
     </div>
     </div>
@@ -105,24 +164,24 @@ export default class ModalMovie {
     this.modalContent.insertAdjacentHTML('beforeend', markup);
 
     if (video) {
-        this.startListenTrailerClick(id);
+      this.startListenTrailerClick(id);
     }
   }
 
   startListenTrailerClick(id) {
     const trailerRun = this.modalContent.querySelector('[data-trailer]');
 
-    trailerRun.addEventListener('click', async() => {
+    trailerRun.addEventListener('click', async () => {
       const movies = new Movies(this.APIKey);
       const { results } = await movies.getMovieTrailers(id);
 
-      const youTubeVideo = results.find(vid => vid.site === "YouTube");
-      
+      const youTubeVideo = results.find(vid => vid.site === 'YouTube');
+
       const instance = basicLightbox.create(`
         <iframe src="https://www.youtube.com/embed/${youTubeVideo.key}" width="560" height="315" frameborder="0"></iframe>
       `);
-      
-      instance.show()
+
+      instance.show();
     });
   }
 }
@@ -130,10 +189,13 @@ export default class ModalMovie {
 const getRef = x => document.querySelector(x);
 const IMAGE_URL = 'https://image.tmdb.org/t/p/w500';
 const refs = {
-  container: getRef('#filmoteka-list'),
+  containerMain: getRef('#filmoteka-list'),
+  containerMyLib: getRef('.library__list'),
   btnClose: getRef('button[data-modal="close"]'),
   openModal: getRef('[data-modal="open"]'),
   modalContent: getRef('.movie-details'),
+  backdrop: getRef('.backdrop'),
+  header: getRef('.header'),
 };
 
 new ModalMovie(refs, IMAGE_URL, APIKey).init();
