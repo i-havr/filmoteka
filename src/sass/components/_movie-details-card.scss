@@ -133,3 +133,15 @@ table {
   font-size: 12px;
   line-height: 1.67;
 }
+
+.movie-details__preview-wrapper {
+  position: relative;
+}
+
+.movie-details__button-trailer {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: pointer;
+}
