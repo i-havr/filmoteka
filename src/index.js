@@ -8,4 +8,5 @@ import './js/search';
 import './js/pagination';
 import './js/watched';
 import './js/arrow-up';
+import './js/read-more';
 import './js/theme';
