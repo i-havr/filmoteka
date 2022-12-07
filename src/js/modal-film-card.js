@@ -1,6 +1,6 @@
 import { Movies } from './fetch';
 import * as basicLightbox from 'basiclightbox';
-import 'basiclightbox/dist/basiclightbox.min.css';
+// import 'basiclightbox/dist/basiclightbox.min.css';
 import { APIKey } from './markup';
 const bodyScrollLock = require('body-scroll-lock');
 import foto from '../images/poster/poster-not-found-desk.jpg';
@@ -201,5 +201,3 @@ const refs = {
 };
 
 new ModalMovie(refs, IMAGE_URL, APIKey).init();
-
-// Привіт я тут просто так
