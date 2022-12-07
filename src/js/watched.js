@@ -15,13 +15,13 @@ let GENRES = [0];
 // Слухачі подій
 try {
   refs.filmotekaList.addEventListener('click', addWatched);
-} catch (error) {}
+} catch (error) { }
 try {
   refs.watchedBtn.addEventListener('click', addLibraryListWatched);
-} catch (error) {}
+} catch (error) { }
 try {
   refs.queueBtn.addEventListener('click', removeLibraryListWatched);
-} catch (error) {}
+} catch (error) { }
 
 Start();
 async function Start() {
@@ -99,7 +99,7 @@ function markupCard(imgObj) {
   const date = new Date(imgObj.release_date);
   const genres = markupGenres(imgObj.genres);
 
-  return `<li class="grid__item filmoteka__item">
+  return `<li class="grid__item filmoteka__item" data-id="${imgObj.id}">
 			<div class="card" data-id="${imgObj.id}">
                 <div class="card__img">
 					<img src="${URI}" alt="${imgObj.title}">

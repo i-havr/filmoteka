@@ -4,9 +4,22 @@ import { addLoadingSpinner, removeLoadingSpinner } from './loading-spinner';
 import clearFilmoteka from './clearFilmoteka';
 import refs from './refs';
 
-let searchValue = 'cat';
+// *********************************************
+import Pagination from 'tui-pagination';
+import {
+  paginationStart,
+  updateMoviesList,
+  makePaginationOptions,
+} from './pagination';
 
-refs.searchForm.addEventListener('submit', onSubmitForm);
+// *********************************************
+
+let searchValue = 'cat';
+const isHeaderMain = refs.header.classList.contains('header--home');
+if (isHeaderMain) {
+  refs.searchForm.addEventListener('submit', onSubmitForm);
+}
+
 
 function onSubmitForm(evt) {
   evt.preventDefault();
@@ -20,16 +33,21 @@ function onSubmitForm(evt) {
 async function Start() {
   await getGenres();
 
-  await getMovies();
+  await getMovies1();
 
   removeLoadingSpinner();
 }
 
-async function getMovies() {
+async function getMovies1(page) {
   const movies = new Movies(APIKey);
 
   try {
-    const { results } = await movies.searchMovies(searchValue);
+    const { results, total_results } = await movies.searchMovies(
+      searchValue,
+      page
+    );
+
+    await getPaginationBySearch(total_results);
 
     if (results.length === 0) {
       // throw new Error(
@@ -60,4 +78,27 @@ function onInvalidSearchQuery() {
   };
 
   removeNotification();
+}
+
+// ************************************************
+
+async function getPaginationBySearch(total_results) {
+  const paginationOptions = makePaginationOptions(total_results);
+
+  paginationStart.off('afterMove', updateMoviesList);
+
+  const paginationBySearch = new Pagination(
+    refs.paginationContainer,
+    paginationOptions
+  );
+
+  paginationBySearch.on('afterMove', updateMoviesListBySearch);
+}
+
+async function updateMoviesListBySearch(event) {
+  const currentPageBySearch = event.page;
+
+  console.log('currentPageBySearch -->', currentPageBySearch);
+
+  await getMovies1(currentPageBySearch);
 }
