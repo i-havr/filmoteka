@@ -68,13 +68,15 @@ export default class ModalMovie {
       original_title,
       genres,
       overview,
+      id,
     } = data;
 
     genres = genres.map(item => item.name).join(', ');
     vote_average = vote_average.toFixed(1);
     popularity = popularity.toFixed(1);
+
     const markup = `
-    <div><img class="movie-details__img" src="${IMAGE_URL}${poster_path}"/></div>
+    <div data-id="${id}"><img class="movie-details__img" src="${IMAGE_URL}${poster_path}"/></div>
     <div class="movie-details__thumb">
     <div class="movie-details__content"><h3 class="movie-details__title">${title}</h3>
     <table><tbody class="table"><tr>
@@ -90,7 +92,7 @@ export default class ModalMovie {
     <p class="movie-details__text">${overview}</p></div>
     <div class="movie-details__buttons">
     <button class="button" type="button"></button>
-    <button class="button" type="button"></button>
+    <button id="modal__button-queue" class="button" type="button">Add to Queue</button>
     <button class="button" type="button"></button>
     </div>
     </div>
