@@ -136,9 +136,17 @@ table {
 }
 
 .movie-details__button-trailer {
+  cursor: pointer;
   position: absolute;
-  bottom: 40px;
+  bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
-  cursor: pointer;
+  color: var(--accent-font-color);
+  border-color: var(--accent-font-color);
+  @include mq(tab)  {
+    bottom: 67px;
+  }
+  @include mq(desk)  {
+    bottom: 30px;
+  }
 }
