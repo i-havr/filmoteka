@@ -2,7 +2,7 @@ import { Movies } from './fetch';
 import * as basicLightbox from 'basiclightbox';
 // import 'basiclightbox/dist/basiclightbox.min.css';
 import { APIKey } from './markup';
-import createBtnWatched from './wetched-create-btn';
+import createBtnWatched from './watched-create-btn';
 const bodyScrollLock = require('body-scroll-lock');
 import foto from '../images/poster/poster-not-found-desk.jpg';
 
