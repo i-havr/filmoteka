@@ -6,6 +6,8 @@
   height: 100%;
   visibility: visible;
   background-color: rgb(0 0 0 / 0.25);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
 }
 
 .my-modal {
@@ -23,6 +25,7 @@
   position: fixed;
   left: 50%;
   top: 50%;
+  z-index: 1001;
 
   padding: 48px 20px 0px;
   width: 90%;
@@ -59,6 +62,7 @@
 }
 
 .list-students {
+  margin: 0;
   list-style: none;
   padding: 0;
   gap: 0 3%;
@@ -70,18 +74,29 @@
   }
 
   .item {
-      display: flex;
-      flex-direction: column;
-      flex: 1 30%;
+    display: flex;
+    flex-direction: column;
+    flex: 1 30%;
   }
 
   .name {
-    color:  var(--accent-font-color);
+    color: var(--accent-font-color);
     text-align: center;
     margin-top: 10px;
-    margin-bottom: 20px;
-    @include mq(tab){
+    @include mq(tab) {
       margin-top: 10px;
     }
   }
+}
+
+.position {
+  color: var(--second-font-color);
+  text-align: center;
+  margin-top: 8px;
+  margin-bottom: 10px;
+  @include mq(tab) {
+    margin-top: 10px;
+  }
+
+  font-size: 12px;
 }
