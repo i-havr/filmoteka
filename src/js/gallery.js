@@ -34,7 +34,6 @@ export async function getTrendMovies(page) {
 
   try {
     const { results } = await movies.getTrendingMovies(page);
-    console.log('results ', results);
 
     if (results.length === 0) {
       throw new Error(
