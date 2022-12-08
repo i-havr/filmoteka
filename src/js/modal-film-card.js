@@ -75,7 +75,7 @@ export default class ModalMovie {
   getMovieDetals(movie) {
     this.fetchMovie(movie)
       .then(data => {
-        this.onMakeMarkup(data);
+        this.onMakeMarkupModal(data);
       })
       .catch(error => {
         console.log(error.name);
@@ -105,7 +105,7 @@ export default class ModalMovie {
     bodyScrollLock.enableBodyScroll(document.body);
   }
 
-  onMakeMarkup(data) {
+  onMakeMarkupModal(data) {
     let {
       poster_path,
       title,
@@ -126,11 +126,19 @@ export default class ModalMovie {
     //   console.log(overview);
     // }
     let img = `${this.IMAGE_URL}${poster_path}`;
-
     if (poster_path === null) {
       img = foto;
     }
 
+    if (overview.length === 0) {
+      overview = 'There is no description';
+    }
+    if (genres.length === 0) {
+      genres = [{
+        id: 0,
+        name: 'No information'
+      }]
+    }
     genres = genres.map(item => item.name).join(', ');
     vote_average = vote_average.toFixed(1);
     popularity = popularity.toFixed(1);
@@ -138,11 +146,10 @@ export default class ModalMovie {
     const markup = `
     <div class="movie-details__preview-wrapper" data-id="${id}">
         <img class="movie-details__img" src="${img}"/>
-        ${
-          video
-            ? '<button class="button movie-details__button-trailer modal__button" data-trailer type="button">Show trailer</button>'
-            : ''
-        }
+        ${video
+        ? '<button class="button movie-details__button-trailer modal__button" data-trailer type="button">Show trailer</button>'
+        : ''
+      }
     </div>
     <div class="movie-details__thumb">
     <div class="movie-details__content"><h3 class="movie-details__title">${title}</h3>
