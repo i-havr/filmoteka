@@ -81,8 +81,8 @@ async function addWatched(event) {
 
     watchedFilmId.splice(namberFilm, 1);
     watchedFilm.splice(namberFilm, 1);
-    localStorage.removeItem('watchedId');
-    localStorage.removeItem('watched');
+    // localStorage.removeItem('watchedId');
+    // localStorage.removeItem('watched');
 
     localStorage.setItem('watchedId', JSON.stringify(watchedFilmId));
     localStorage.setItem('watched', JSON.stringify(watchedFilm));
