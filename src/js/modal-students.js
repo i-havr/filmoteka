@@ -1,19 +1,24 @@
-// const refs = {
-//   modal: document.querySelector('#my-modal'),
-//   openLink: document.querySelector('.footer__link'),
-//   backdrop: document.querySelector('#my-backdrop'),
-//   close: document.querySelector('#my-close-button'),
-// };
+const refs = {
+  modal: document.querySelector('#my-modal'),
+  openLink: document.querySelector('.footer__link'),
+  backdrop: document.querySelector('#my-backdrop'),
+  close: document.querySelector('#my-close-button'),
+  header: document.querySelector('.header'),
+};
 
-// refs.openLink.addEventListener('click', onOpen);
-// refs.close.addEventListener('click', onClose);
-// refs.backdrop.addEventListener('click', onClose);
+const isHeaderMain = refs.header.classList.contains('header--home');
 
-// function onOpen(e) {
-//   e.preventDefault();
-//   refs.modal.classList.toggle('hidden');
-// }
+if (isHeaderMain) {
+  refs.openLink.addEventListener('click', onOpen);
+  refs.close.addEventListener('click', onClose);
+  refs.backdrop.addEventListener('click', onClose);
+}
 
-// function onClose(e) {
-//   refs.modal.classList.toggle('hidden');
-// }
+function onOpen(e) {
+  e.preventDefault();
+  refs.modal.classList.toggle('hidden');
+}
+
+function onClose(e) {
+  refs.modal.classList.toggle('hidden');
+}
