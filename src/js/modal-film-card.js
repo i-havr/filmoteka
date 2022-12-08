@@ -3,6 +3,9 @@ import * as basicLightbox from 'basiclightbox';
 // import 'basiclightbox/dist/basiclightbox.min.css';
 import { APIKey } from './markup';
 import createBtnWatched from './watched-create-btn';
+import createBtnQueue from './queue-create-btn';
+import { addLibraryListWatched } from './watched';
+import { addLibraryListQueue } from './queue';
 const bodyScrollLock = require('body-scroll-lock');
 import foto from '../images/poster/poster-not-found-desk.jpg';
 
@@ -101,6 +104,26 @@ export default class ModalMovie {
     }
   }
   onCloseModal() {
+    if (document.querySelector('#watched-btn')) {
+      if (
+        document.querySelector('#watched-btn').classList[0] ===
+          'button--active' ||
+        document.querySelector('#watched-btn').classList[1] ===
+          'button--active' ||
+        document.querySelector('#watched-btn').classList[2] === 'button--active'
+      ) {
+        addLibraryListWatched();
+      }
+      if (
+        document.querySelector('#queue-btn').classList[0] ===
+          'button--active' ||
+        document.querySelector('#queue-btn').classList[1] ===
+          'button--active' ||
+        document.querySelector('#queue-btn').classList[2] === 'button--active'
+      ) {
+        addLibraryListQueue();
+      }
+    }
     this.openModal.classList.add('is-hidden');
     this.modalContent.innerHTML = '';
     bodyScrollLock.enableBodyScroll(document.body);
@@ -177,6 +200,7 @@ export default class ModalMovie {
     this.modalContent.insertAdjacentHTML('beforeend', markup);
 
     createBtnWatched(id);
+    createBtnQueue(id);
 
     if (video) {
       this.startListenTrailerClick(id);
