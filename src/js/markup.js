@@ -11,7 +11,6 @@ export function markupFilmoteka(dataArr) {
   const markup = dataArr.map(markupCard).join('');
   const isHeaderMain = refs.header.classList.contains('header--home');
   if (isHeaderMain) {
-
     refs.filmotekaList.insertAdjacentHTML('beforeend', markup);
   }
 }
@@ -25,7 +24,6 @@ export function markupMyLibrary(dataArr) {
 
 export function markupCard(imgObj) {
   const base_url = 'https://image.tmdb.org/t/p/';
-  // const file_size = 'original';
   const file_size = 'w500';
   let URI = `${base_url}${file_size}${imgObj.poster_path}`;
   if (imgObj.poster_path === null) {
