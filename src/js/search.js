@@ -3,8 +3,6 @@ import { markupFilmoteka, getGenres, APIKey } from './markup';
 import { addLoadingSpinner, removeLoadingSpinner } from './loading-spinner';
 import clearFilmoteka from './clearFilmoteka';
 import refs from './refs';
-
-// *********************************************
 import Pagination from 'tui-pagination';
 import {
   paginationStart,
@@ -12,14 +10,11 @@ import {
   makePaginationOptions,
 } from './pagination';
 
-// *********************************************
-
 let searchValue = 'cat';
 const isHeaderMain = refs.header.classList.contains('header--home');
 if (isHeaderMain) {
   refs.searchForm.addEventListener('submit', onSubmitForm);
 }
-
 
 function onSubmitForm(evt) {
   evt.preventDefault();
@@ -33,12 +28,12 @@ function onSubmitForm(evt) {
 async function Start() {
   await getGenres();
 
-  await getMovies1();
+  await getMoviesBySearch();
 
   removeLoadingSpinner();
 }
 
-async function getMovies1(page) {
+async function getMoviesBySearch(page) {
   const movies = new Movies(APIKey);
 
   try {
@@ -47,7 +42,7 @@ async function getMovies1(page) {
       page
     );
 
-    await getPaginationBySearch(total_results);
+    await getPaginationBySearch(total_results, page);
 
     if (results.length === 0) {
       // throw new Error(
@@ -80,10 +75,10 @@ function onInvalidSearchQuery() {
   removeNotification();
 }
 
-// ************************************************
+// Pagination
 
-async function getPaginationBySearch(total_results) {
-  const paginationOptions = makePaginationOptions(total_results);
+async function getPaginationBySearch(total_results, page) {
+  const paginationOptions = makePaginationOptions(total_results, page);
 
   paginationStart.off('afterMove', updateMoviesList);
 
@@ -100,5 +95,5 @@ async function updateMoviesListBySearch(event) {
 
   console.log('currentPageBySearch -->', currentPageBySearch);
 
-  await getMovies1(currentPageBySearch);
+  await getMoviesBySearch(currentPageBySearch);
 }
