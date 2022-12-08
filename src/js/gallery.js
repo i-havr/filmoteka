@@ -1,6 +1,6 @@
 import { addLoadingSpinner, removeLoadingSpinner } from './loading-spinner';
 import { Movies } from './fetch';
-import clearFilmoteka from './clearFilmoteka';
+import clearFilmoteka from './clear-filmoteka';
 import { markupFilmoteka, getGenres, APIKey } from './markup';
 import refs from './refs';
 
