@@ -40,9 +40,10 @@
   }
 }
 
-// .footer__icon {
-//   color: var(--header-font-color);
-// }
+.footer__icon {
+  color: var(--header-font-color);
+  width: 14px;
+}
 
 .footer__link {
   color: inherit;

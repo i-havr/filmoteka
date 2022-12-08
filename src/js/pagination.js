@@ -1,16 +1,15 @@
 import Pagination from 'tui-pagination';
-import 'tui-pagination/dist/tui-pagination.css';
-import { getMovies } from './gallery';
+// import 'tui-pagination/dist/tui-pagination.css';
+import { getTrendMovies } from './gallery';
 import moveUp from './move-up';
+import refs from './refs';
 
-const container = document.getElementById('pagination');
-
-function makePaginationOptions(totalResults = 10000) {
+export function makePaginationOptions(totalResults = 10000, currentPage = 1) {
   return {
     totalItems: totalResults,
     itemsPerPage: 20,
     visiblePages: 5,
-    page: 1,
+    page: currentPage,
     centerAlign: true,
     firstItemClassName: 'tui-first-child',
     lastItemClassName: 'tui-last-child',
@@ -34,18 +33,21 @@ function makePaginationOptions(totalResults = 10000) {
   };
 }
 
-const options = makePaginationOptions();
+const paginationOptions = makePaginationOptions();
 
-export const pagination = new Pagination(container, options);
+export const paginationStart = new Pagination(
+  refs.paginationContainer,
+  paginationOptions
+);
 
-pagination.on('afterMove', updateMoviesList);
+paginationStart.on('afterMove', updateMoviesList);
 
-function updateMoviesList(event) {
-  const currentPage = event.page;
+export async function updateMoviesList(event) {
+  const currentPageStart = event.page;
 
-  console.log('currentPage -->', currentPage);
+  console.log('currentPageStart -->', currentPageStart);
 
-  getMovies(currentPage);
+  await getTrendMovies(currentPageStart);
 
   moveUp();
 }

@@ -1,33 +1,35 @@
 import { addLoadingSpinner, removeLoadingSpinner } from './loading-spinner';
 import { Movies } from './fetch';
-import clearFilmoteka from './clearFilmoteka';
+import clearFilmoteka from './clear-filmoteka';
 import { markupFilmoteka, getGenres, APIKey } from './markup';
 import refs from './refs';
 
 let searchValue = 'cat';
-
-refs.searchForm.addEventListener('submit', onSubmitForm);
+const isHeaderMain = refs.header.classList.contains('header--home');
+if (isHeaderMain) {
+  refs.searchForm.addEventListener('submit', onSubmitForm);
+}
 
 function onSubmitForm(evt) {
   evt.preventDefault();
   searchValue = evt.currentTarget.elements.searchQuery.value;
   clearFilmoteka();
-  Start();
+  startGallery();
 }
 
-Start();
+startGallery();
 
-async function Start() {
+async function startGallery() {
   addLoadingSpinner();
 
   await getGenres();
-  await getMovies();
+  await getTrendMovies();
 
   removeLoadingSpinner();
 }
 
 // Page from pagination
-export async function getMovies(page) {
+export async function getTrendMovies(page) {
   const movies = new Movies(APIKey);
 
   try {

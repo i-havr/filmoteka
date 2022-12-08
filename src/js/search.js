@@ -1,12 +1,20 @@
 import { Movies } from './fetch';
 import { markupFilmoteka, getGenres, APIKey } from './markup';
 import { addLoadingSpinner, removeLoadingSpinner } from './loading-spinner';
-import clearFilmoteka from './clearFilmoteka';
+import clearFilmoteka from './clear-filmoteka';
 import refs from './refs';
+import Pagination from 'tui-pagination';
+import {
+  paginationStart,
+  updateMoviesList,
+  makePaginationOptions,
+} from './pagination';
 
 let searchValue = 'cat';
-
-refs.searchForm.addEventListener('submit', onSubmitForm);
+const isHeaderMain = refs.header.classList.contains('header--home');
+if (isHeaderMain) {
+  refs.searchForm.addEventListener('submit', onSubmitForm);
+}
 
 function onSubmitForm(evt) {
   evt.preventDefault();
@@ -14,22 +22,27 @@ function onSubmitForm(evt) {
   clearFilmoteka();
   addLoadingSpinner();
 
-  Start();
+  startSearch();
 }
 
-async function Start() {
+async function startSearch() {
   await getGenres();
 
-  await getMovies();
+  await getMoviesBySearch();
 
   removeLoadingSpinner();
 }
 
-async function getMovies() {
+async function getMoviesBySearch(page) {
   const movies = new Movies(APIKey);
 
   try {
-    const { results } = await movies.searchMovies(searchValue);
+    const { results, total_results } = await movies.searchMovies(
+      searchValue,
+      page
+    );
+
+    await getPaginationBySearch(total_results, page);
 
     if (results.length === 0) {
       // throw new Error(
@@ -60,4 +73,27 @@ function onInvalidSearchQuery() {
   };
 
   removeNotification();
+}
+
+// Pagination
+
+async function getPaginationBySearch(total_results, page) {
+  const paginationOptions = makePaginationOptions(total_results, page);
+
+  paginationStart.off('afterMove', updateMoviesList);
+
+  const paginationBySearch = new Pagination(
+    refs.paginationContainer,
+    paginationOptions
+  );
+
+  paginationBySearch.on('afterMove', updateMoviesListBySearch);
+}
+
+async function updateMoviesListBySearch(event) {
+  const currentPageBySearch = event.page;
+
+  console.log('currentPageBySearch -->', currentPageBySearch);
+
+  await getMoviesBySearch(currentPageBySearch);
 }
