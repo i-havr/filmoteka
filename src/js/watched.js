@@ -75,13 +75,13 @@ async function addWatched(event) {
       JSON.parse(event.target.offsetParent.children[2].children[0].dataset.id)
     );
 
-    await watchedFilmId.splice(namberFilm, 1);
-    await watchedFilm.splice(namberFilm, 1);
-    await localStorage.removeItem('watchedId');
-    await localStorage.removeItem('watched');
+    watchedFilmId.splice(namberFilm, 1);
+    watchedFilm.splice(namberFilm, 1);
+    localStorage.removeItem('watchedId');
+    localStorage.removeItem('watched');
 
-    await localStorage.setItem('watchedId', JSON.stringify(watchedFilmId));
-    await localStorage.setItem('watched', JSON.stringify(watchedFilm));
+    localStorage.setItem('watchedId', JSON.stringify(watchedFilmId));
+    localStorage.setItem('watched', JSON.stringify(watchedFilm));
     return;
   }
 

@@ -48,13 +48,13 @@ async function addToQueue(event) {
       JSON.parse(event.target.offsetParent.children[2].children[0].dataset.id)
     );
 
-    await queueFilmId.splice(namberFilm, 1);
-    await queueFilm.splice(namberFilm, 1);
-    await localStorage.removeItem('queueId');
-    await localStorage.removeItem('queue');
+    queueFilmId.splice(namberFilm, 1);
+    queueFilm.splice(namberFilm, 1);
+    localStorage.removeItem('queueId');
+    localStorage.removeItem('queue');
 
-    await localStorage.setItem('queueId', JSON.stringify(queueFilmId));
-    await localStorage.setItem('queue', JSON.stringify(queueFilm));
+    localStorage.setItem('queueId', JSON.stringify(queueFilmId));
+    localStorage.setItem('queue', JSON.stringify(queueFilm));
     return;
   }
 
