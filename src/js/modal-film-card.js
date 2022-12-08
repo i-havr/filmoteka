@@ -1,6 +1,6 @@
 import { Movies } from './fetch';
 import * as basicLightbox from 'basiclightbox';
-// import 'basiclightbox/dist/basiclightbox.min.css';
+import 'basiclightbox/dist/basiclightbox.min.css';
 import { APIKey } from './markup';
 import createBtnWatched from './watched-create-btn';
 const bodyScrollLock = require('body-scroll-lock');
@@ -135,10 +135,12 @@ export default class ModalMovie {
       overview = 'There is no description';
     }
     if (genres.length === 0) {
-      genres = [{
-        id: 0,
-        name: 'No information'
-      }]
+      genres = [
+        {
+          id: 0,
+          name: 'No information',
+        },
+      ];
     }
     genres = genres.map(item => item.name).join(', ');
     vote_average = vote_average.toFixed(1);
@@ -147,10 +149,11 @@ export default class ModalMovie {
     const markup = `
     <div class="movie-details__preview-wrapper" data-id="${id}">
         <img class="movie-details__img" src="${img}"/>
-        ${video
-        ? '<button class="button movie-details__button-trailer modal__button" data-trailer type="button">Show trailer</button>'
-        : ''
-      }
+        ${
+          video
+            ? '<button class="button movie-details__button-trailer modal__button" data-trailer type="button">Show trailer</button>'
+            : ''
+        }
     </div>
     <div class="movie-details__thumb">
     <div class="movie-details__content"><h3 class="movie-details__title">${title}</h3>
