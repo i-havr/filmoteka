@@ -1,4 +1,5 @@
 import { Movies } from './fetch';
+import foto from '../images/poster/poster-not-found-main.jpg';
 
 const APIKey = 'e0e51fe83e5367383559a53110fae0e8';
 
@@ -21,6 +22,7 @@ let GENRES = [0];
 try {
   refs.modalCard.addEventListener('click', addWatched);
 } catch (error) {}
+
 try {
   refs.watchedBtn.addEventListener('click', addLibraryListWatched);
 } catch (error) {}
@@ -127,8 +129,14 @@ async function addLibraryListWatched() {
 
 // Створення однієї картки
 function markupCard(imgObj) {
-  const URI = `https://image.tmdb.org/t/p/w500${imgObj.poster_path}`;
-  const date = new Date(imgObj.release_date);
+  let URI = `https://image.tmdb.org/t/p/w500${imgObj.poster_path}`;
+  if (imgObj.poster_path === null) {
+    URI = foto;
+  }
+  let date = new Date(imgObj.release_date).getFullYear();
+  if (Number.isNaN(Number(date))) {
+    date = 'No information';
+  }
   const genres = markupGenres(imgObj.genres);
 
   return `<li class="grid__item filmoteka__item" data-id="${imgObj.id}">
@@ -138,7 +146,7 @@ function markupCard(imgObj) {
 				</div>
                     <div class="card__wrapper">
                         <h2 class="card__title title">${imgObj.title}</h2>
-                        <p class="card__desc">${genres} | ${date.getFullYear()}
+                        <p class="card__desc">${genres} | ${date}
                         <span class="card__vote">
                             ${imgObj.vote_average.toFixed(1)}
                         </span>
@@ -150,6 +158,9 @@ function markupCard(imgObj) {
 
 // Створення жанрів в одну картку
 function markupGenres(genre_ids) {
+  if (genre_ids.length === 0) {
+    return 'No information';
+  }
   let genres = [];
   for (const genre of genre_ids) {
     genres.push(genre.name);

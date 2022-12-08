@@ -1,7 +1,7 @@
 import { Movies } from './fetch';
 import { markupFilmoteka, getGenres, APIKey } from './markup';
 import { addLoadingSpinner, removeLoadingSpinner } from './loading-spinner';
-import clearFilmoteka from './clearFilmoteka';
+import clearFilmoteka from './clear-filmoteka';
 import refs from './refs';
 import Pagination from 'tui-pagination';
 import {

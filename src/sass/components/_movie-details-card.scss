@@ -12,13 +12,10 @@
   border-radius: 5px;
   @include mq(mob-only) {
     margin-bottom: 20px;
-    // width: 240px;
-    // height: 357px;
   }
   @include mq(tab) {
     width: 264px;
     height: 396px;
-    object-fit: cover;
   }
   @include mq(desk) {
     width: 375px;
