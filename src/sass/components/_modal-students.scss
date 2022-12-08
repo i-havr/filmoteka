@@ -7,6 +7,7 @@
   visibility: visible;
   background-color: rgb(0 0 0 / 0.25);
   backdrop-filter: blur(10px);
+  z-index: 1000;
 }
 
 .my-modal {
@@ -24,6 +25,7 @@
   position: fixed;
   left: 50%;
   top: 50%;
+  z-index: 1001;
 
   padding: 48px 20px 0px;
   width: 90%;
