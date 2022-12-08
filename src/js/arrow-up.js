@@ -5,11 +5,9 @@ const pageTop = () => {
   const position = document.documentElement.scrollTop;
 
   if (position > 170) {
-    // scrollProgress.style.display = 'flex';
     scrollProgress.style.opacity = '1';
     scrollProgress.style.visibility = 'visible';
   } else {
-    // scrollProgress.style.display = 'none';
     scrollProgress.style.opacity = '0';
     scrollProgress.style.visibility = 'hidden';
   }
