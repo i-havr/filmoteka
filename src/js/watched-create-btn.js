@@ -1,4 +1,3 @@
-//  Витяг з LocalStorage
 let watchedFilm = [];
 let watchedFilmId = [];
 async function checkWatched() {
@@ -8,7 +7,6 @@ async function checkWatched() {
   }
 }
 
-// ---------
 export default async function createBtnWatched(id) {
   checkWatched();
 

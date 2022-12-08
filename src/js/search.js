@@ -46,9 +46,6 @@ async function getMoviesBySearch(page) {
     await getPaginationBySearch(total_results, page);
 
     if (results.length === 0) {
-      // throw new Error(
-      //   'Sorry, there are no movies matching your search query. Please try again.'
-      // );
       onInvalidSearchQuery();
       return;
     }
