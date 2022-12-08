@@ -17,5 +17,3 @@ function onOpen(e) {
 function onClose(e) {
   refs.modal.classList.toggle('hidden');
 }
-
-

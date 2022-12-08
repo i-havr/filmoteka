@@ -8,7 +8,7 @@ const refs = {
   libraryList: document.querySelector('#library-list'),
   queueBtn: document.querySelector('#queue-btn'),
   watchedBtn: document.querySelector('#watched-btn'),
-}
+};
 
 let GENRES = [0];
 
@@ -17,30 +17,28 @@ refs.modal.addEventListener('click', addToQueue);
 const isMyLibMain = refs.header.classList.contains('header--mylib');
 if (isMyLibMain) {
   refs.queueBtn.addEventListener('click', addLibraryListQueue);
-  refs.watchedBtn.addEventListener('click', removeLibraryListQueue);
 }
+Start();
 
 async function Start() {
   await getGenres();
 
   await checkQueue();
-
-  await addLibraryListQueue();
 }
-
 
 let queueFilm = [];
 let queueFilmId = [];
 
-
 async function addToQueue(event) {
-  if (event.target.nodeName !== 'BUTTON' ||
-    event.target.id !== 'modal__button-queue') {
+  if (
+    event.target.nodeName !== 'BUTTON' ||
+    event.target.id !== 'modal__button-queue'
+  ) {
     return;
   }
-  
+
   const movies = new Movies(APIKey);
-    
+
   if (event.target.classList[1] === 'modal__button--active') {
     event.target.textContent = 'add to Queue';
     event.target.classList.add('modal__button');
@@ -89,25 +87,21 @@ async function checkQueue() {
   }
 }
 
-async function addLibraryListQueue() {
-  
+export async function addLibraryListQueue() {
   try {
     refs.libraryList.innerHTML = '';
     refs.queueBtn.classList.add('button--active');
     refs.watchedBtn.classList.remove('button--active');
-  } catch (error) { }
+  } catch (error) {}
 
   if (localStorage.getItem('queue')) {
-    Start();
     for (const film of queueFilm) {
       try {
-        
         refs.libraryList.insertAdjacentHTML('beforeend', markupCard(film));
-      } catch (error) { }
+      } catch (error) {}
     }
   }
 }
-
 
 function markupCard(imgObj) {
   const URI = `https://image.tmdb.org/t/p/w500${imgObj.poster_path}`;
@@ -147,14 +141,3 @@ async function getGenres() {
     console.log(error.message);
   }
 }
-
-function removeLibraryListQueue() {
-  refs.libraryList.innerHTML = '';
-
-  refs.queueBtn.classList.remove('button--active');
-  refs.watchedBtn.classList.add('button--active');
-}
-
-
-
-
