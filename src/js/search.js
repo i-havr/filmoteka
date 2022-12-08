@@ -1,5 +1,6 @@
 import { Movies } from './fetch';
-import { markupFilmoteka, getGenres, APIKey } from './markup';
+import { markupFilmoteka } from './markup';
+import { APIKey } from './apikey';
 import { addLoadingSpinner, removeLoadingSpinner } from './loading-spinner';
 import clearFilmoteka from './clear-filmoteka';
 import refs from './refs';
@@ -27,7 +28,7 @@ function onSubmitForm(evt) {
 }
 
 async function startSearch() {
-  await getGenres();
+  // await getGenres();
 
   await getMoviesBySearch();
 

@@ -1,13 +1,16 @@
 import { addLoadingSpinner, removeLoadingSpinner } from './loading-spinner';
 import { Movies } from './fetch';
 import clearFilmoteka from './clear-filmoteka';
-import { markupFilmoteka, getGenres, APIKey } from './markup';
+import { markupFilmoteka } from './markup';
+// import { getGenres } from './genres';
+import { APIKey } from './apikey';
 import refs from './refs';
 
 let searchValue = 'cat';
 const isHeaderMain = refs.header.classList.contains('header--home');
 
 if (isHeaderMain) {
+  startGallery();
   refs.searchForm.addEventListener('submit', onSubmitForm);
 }
 
@@ -18,12 +21,10 @@ function onSubmitForm(evt) {
   startGallery();
 }
 
-startGallery();
-
 async function startGallery() {
   addLoadingSpinner();
 
-  await getGenres();
+  // await getGenres();
   await getTrendMovies();
 
   removeLoadingSpinner();

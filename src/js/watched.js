@@ -1,9 +1,9 @@
 import { Movies } from './fetch';
-import foto from '../images/poster/poster-not-found-main.jpg';
-
-const APIKey = 'e0e51fe83e5367383559a53110fae0e8';
+import { APIKey } from './apikey';
+import { markupMyLibrary } from './markup';
 
 const refs = {
+  header: document.querySelector('.header'),
   libraryList: document.querySelector('#library-list'),
   filmotekaList: document.querySelector('#filmoteka-list'),
   filmotekaItem: document.querySelector('.filmoteka__item'),
@@ -15,41 +15,44 @@ const refs = {
   modalCloseBtn: document.querySelector('.modal__close-btn'),
 };
 
-let GENRES = [0];
-
 // Слухачі подій
 
 try {
   refs.modalCard.addEventListener('click', addWatched);
 } catch (error) {}
 
-try {
-  refs.watchedBtn.addEventListener('click', addLibraryListWatched);
-} catch (error) {}
+let watchedFilm = [];
+let watchedFilmId = [];
+const isMyLibMain = refs.header.classList.contains('header--mylib');
+if (isMyLibMain) {
+  createWatched();
+  // Слухачі подій
 
-createWatched();
+  try {
+    refs.watchedBtn.addEventListener('click', addLibraryListWatched);
+  } catch (error) {}
+}
+
 async function createWatched() {
-  await createGenres();
+  // await createGenres();
 
-  await checkWatched();
+  checkWatched();
 
   await addLibraryListWatched();
 }
 
 // Формування переліку жанрів
-async function createGenres() {
-  const movies = new Movies(APIKey);
-  try {
-    GENRES = await movies.getGenres();
-  } catch (error) {
-    console.log(error.message);
-  }
-}
+// async function createGenres() {
+//   const movies = new Movies(APIKey);
+//   try {
+//     GENRES = await movies.getGenres();
+//   } catch (error) {
+//     console.log(error.message);
+//   }
+// }
 
 //  Витяг з LocalStorage
-let watchedFilm = [];
-let watchedFilmId = [];
-async function checkWatched() {
+function checkWatched() {
   if (localStorage.getItem('watched')) {
     watchedFilm = JSON.parse(localStorage.getItem('watched'));
     watchedFilmId = JSON.parse(localStorage.getItem('watchedId'));
@@ -65,6 +68,7 @@ async function addWatched(event) {
     return;
   }
   const movies = new Movies(APIKey);
+  checkWatched();
 
   if (event.target.classList[1] === 'modal__button--active') {
     event.target.textContent = 'add to Watched';
@@ -116,51 +120,52 @@ export async function addLibraryListWatched() {
   } catch (error) {}
 
   if (localStorage.getItem('watched')) {
-    for (const film of watchedFilm) {
-      try {
-        refs.libraryList.insertAdjacentHTML('beforeend', markupCard(film));
-      } catch (error) {}
-    }
+    markupMyLibrary(watchedFilm);
+    // for (const film of watchedFilm) {
+    //   try {
+    //     refs.libraryList.insertAdjacentHTML('beforeend', markupCardLib(film));
+    //   } catch (error) {}
+    // }
   }
 }
 
 // Створення однієї картки
-function markupCard(imgObj) {
-  let URI = `https://image.tmdb.org/t/p/w500${imgObj.poster_path}`;
-  if (imgObj.poster_path === null) {
-    URI = foto;
-  }
-  let date = new Date(imgObj.release_date).getFullYear();
-  if (Number.isNaN(Number(date))) {
-    date = 'No information';
-  }
-  const genres = markupGenres(imgObj.genres);
+// function markupCard(imgObj) {
+//   let URI = `https://image.tmdb.org/t/p/w500${imgObj.poster_path}`;
+//   if (imgObj.poster_path === null) {
+//     URI = foto;
+//   }
+//   let date = new Date(imgObj.release_date).getFullYear();
+//   if (Number.isNaN(Number(date))) {
+//     date = 'No information';
+//   }
+//   const genres = markupGenres(imgObj.genres);
 
-  return `<li class="grid__item filmoteka__item" data-id="${imgObj.id}">
-			<div class="card" data-id="${imgObj.id}">
-                <div class="card__img">
-					<img src="${URI}" alt="${imgObj.title}">
-				</div>
-                    <div class="card__wrapper">
-                        <h2 class="card__title title">${imgObj.title}</h2>
-                        <p class="card__desc">${genres} | ${date}
-                        <span class="card__vote">
-                            ${imgObj.vote_average.toFixed(1)}
-                        </span>
-                        </p>
-                    </div>
-                </div>
-			</li>`;
-}
+//   return `<li class="grid__item filmoteka__item" data-id="${imgObj.id}">
+// 			<div class="card" data-id="${imgObj.id}">
+//                 <div class="card__img">
+// 					<img src="${URI}" alt="${imgObj.title}">
+// 				</div>
+//                     <div class="card__wrapper">
+//                         <h2 class="card__title title">${imgObj.title}</h2>
+//                         <p class="card__desc">${genres} | ${date}
+//                         <span class="card__vote">
+//                             ${imgObj.vote_average.toFixed(1)}
+//                         </span>
+//                         </p>
+//                     </div>
+//                 </div>
+// 			</li>`;
+// }
 
 // Створення жанрів в одну картку
-function markupGenres(genre_ids) {
-  if (genre_ids.length === 0) {
-    return 'No information';
-  }
-  let genres = [];
-  for (const genre of genre_ids) {
-    genres.push(genre.name);
-  }
-  return genres.join(', ');
-}
+// function markupGenres(genre_ids) {
+//   if (genre_ids.length === 0) {
+//     return 'No information';
+//   }
+//   let genres = [];
+//   for (const genre of genre_ids) {
+//     genres.push(genre.name);
+//   }
+//   return genres.join(', ');
+// }

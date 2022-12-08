@@ -1,6 +1,6 @@
 import { Movies } from './fetch';
 import * as basicLightbox from 'basiclightbox';
-import { APIKey } from './markup';
+import { APIKey } from './apikey';
 import createBtnWatched from './watched-create-btn';
 import createBtnQueue from './queue-create-btn';
 import { addLibraryListWatched } from './watched';
