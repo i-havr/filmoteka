@@ -11,7 +11,30 @@ const movies = new Movies(APIKey);
 
 export const showMore = new ShowMore({ selector: '.show-more', hidden: true });
 
-export function makePaginationOptions(totalResults = 10000, currentPage = 1) {
+const nextOptions = {
+  nextPage: 1,
+  async addNextTrendingMovies() {
+    try {
+      this.nextPage += 1;
+      const { results, total_pages } = await movies.getTrendingMovies(
+        this.nextPage
+      );
+      markupFilmoteka(results);
+      showMore.enable();
+
+      if (total_pages === this.nextPage) {
+        showMore.hide();
+      }
+    } catch (error) {
+      console.log(error.name, error.message);
+    }
+  },
+};
+
+export function makePaginationOptions(
+  totalResults = 20000,
+  currentPage = nextOptions.nextPage
+) {
   return {
     totalItems: totalResults,
     itemsPerPage: 20,
@@ -51,10 +74,35 @@ paginationStart.on('afterMove', updateMoviesList);
 
 export async function updateMoviesList(event) {
   const currentPageStart = event.page;
+  nextOptions.nextPage = currentPageStart;
 
   console.log('currentPageStart -->', currentPageStart);
 
   await getTrendMovies(currentPageStart);
 
   moveUp();
+}
+
+showMore.refs.blockShowMore.addEventListener('click', onShowMoreClick);
+
+async function onShowMoreClick() {
+  showMore.disable();
+
+  await nextOptions.addNextTrendingMovies(paginationStart._currentPage);
+
+  paginationStart.off();
+  paginationStart.on('afterMove', updateMoviesListByShowMore);
+  paginationStart.movePageTo(nextOptions.nextPage);
+  console.log('nextPage after showMore -->', nextOptions.nextPage);
+  paginationStart.off();
+  paginationStart.on('afterMove', updateMoviesList);
+}
+
+export function updateMoviesListByShowMore(event) {
+  console.log('event.page -->', event.page);
+
+  nextOptions.nextPage = event.page;
+  console.log('nextPage in updateMoviesList -->', nextOptions.nextPage);
+
+  getAppendMovies(event.page);
 }
