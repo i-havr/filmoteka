@@ -9,6 +9,7 @@ import {
   updateMoviesList,
   makePaginationOptions,
 } from './pagination';
+import moveUp from './move-up';
 
 let searchValue = 'cat';
 const isHeaderMain = refs.header.classList.contains('header--home');
@@ -88,6 +89,8 @@ async function getPaginationBySearch(total_results, page) {
   );
 
   paginationBySearch.on('afterMove', updateMoviesListBySearch);
+
+  moveUp();
 }
 
 async function updateMoviesListBySearch(event) {
