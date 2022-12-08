@@ -1,8 +1,15 @@
 import Pagination from 'tui-pagination';
 // import 'tui-pagination/dist/tui-pagination.css';
-import { getTrendMovies } from './gallery';
+import { getTrendMovies, getAppendMovies } from './gallery';
 import moveUp from './move-up';
 import refs from './refs';
+import { Movies } from './fetch';
+import { markupFilmoteka, APIKey } from './markup';
+import ShowMore from './show-more-btn';
+
+const movies = new Movies(APIKey);
+
+export const showMore = new ShowMore({ selector: '.show-more', hidden: true });
 
 export function makePaginationOptions(totalResults = 10000, currentPage = 1) {
   return {

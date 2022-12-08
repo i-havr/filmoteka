@@ -34,7 +34,7 @@ async function startGallery() {
 
 // Page from pagination
 export async function getTrendMovies(page) {
-  const movies = new Movies(APIKey);
+  // const movies = new Movies(APIKey);
 
   try {
     const { results, total_pages } = await movies.getTrendingMovies(page);
