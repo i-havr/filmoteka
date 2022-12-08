@@ -22,10 +22,10 @@ function onSubmitForm(evt) {
   clearFilmoteka();
   addLoadingSpinner();
 
-  Start();
+  startSearch();
 }
 
-async function Start() {
+async function startSearch() {
   await getGenres();
 
   await getMoviesBySearch();

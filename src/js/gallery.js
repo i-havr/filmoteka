@@ -14,12 +14,12 @@ function onSubmitForm(evt) {
   evt.preventDefault();
   searchValue = evt.currentTarget.elements.searchQuery.value;
   clearFilmoteka();
-  Start();
+  startGallery();
 }
 
-Start();
+startGallery();
 
-async function Start() {
+async function startGallery() {
   addLoadingSpinner();
 
   await getGenres();
