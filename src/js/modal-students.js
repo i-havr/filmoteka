@@ -1,3 +1,5 @@
+const bodyScrollLock = require('body-scroll-lock');
+
 const refs = {
   modal: document.querySelector('#my-modal'),
   openLink: document.querySelector('.footer__link'),
@@ -16,9 +18,11 @@ if (isHeaderMain) {
 
 function onOpen(e) {
   e.preventDefault();
+  bodyScrollLock.disableBodyScroll(document.body);
   refs.modal.classList.toggle('hidden');
 }
 
 function onClose(e) {
+  bodyScrollLock.enableBodyScroll(document.body);
   refs.modal.classList.toggle('hidden');
 }
