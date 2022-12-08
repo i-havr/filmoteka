@@ -1,6 +1,6 @@
 // const refs = {
-//   openLink: document.querySelector('.footer__link'),
 //   modal: document.querySelector('#my-modal'),
+//   openLink: document.querySelector('.footer__link'),
 //   backdrop: document.querySelector('#my-backdrop'),
 //   close: document.querySelector('#my-close-button'),
 // };
@@ -11,9 +11,9 @@
 
 // function onOpen(e) {
 //   e.preventDefault();
-//   refs.backdrop.classList.toggle('hidden');
+//   refs.modal.classList.toggle('hidden');
 // }
 
-// function onClose() {
-//   refs.backdrop.classList.toggle('hidden');
+// function onClose(e) {
+//   refs.modal.classList.toggle('hidden');
 // }
