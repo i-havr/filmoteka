@@ -1,6 +1,5 @@
 import { Movies } from './fetch';
-
-const APIKey = 'e0e51fe83e5367383559a53110fae0e8';
+import { APIKey } from './apikey';
 
 const refs = {
   header: document.querySelector('.header'),

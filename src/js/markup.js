@@ -1,8 +1,7 @@
 import { Movies } from './fetch';
 import refs from './refs';
 import foto from '../images/poster/poster-not-found-main.jpg';
-
-export const APIKey = 'e0e51fe83e5367383559a53110fae0e8';
+import { APIKey } from './apikey';
 
 let GENRES = [0];
 
@@ -25,7 +24,6 @@ export function markupCard(imgObj) {
     date = 'No information';
   }
   const genres = markupGenres(imgObj.genre_ids);
-
 
   return `<li class="grid__item filmoteka__item" data-id="${imgObj.id}">
 			<div class="card" data-id="${imgObj.id}">

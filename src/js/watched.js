@@ -1,7 +1,6 @@
 import { Movies } from './fetch';
+import { APIKey } from './apikey';
 import foto from '../images/poster/poster-not-found-main.jpg';
-
-const APIKey = 'e0e51fe83e5367383559a53110fae0e8';
 
 const refs = {
   libraryList: document.querySelector('#library-list'),
