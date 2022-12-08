@@ -50,7 +50,6 @@ export async function getTrendMovies(page) {
     markupFilmoteka(results);
 
     if (total_pages > 20 && page !== total_pages) {
-      console.log(total_pages);
       showMore.show();
       showMore.enable();
     }

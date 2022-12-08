@@ -9,7 +9,7 @@ import ShowMore from './show-more-btn';
 
 const movies = new Movies(APIKey);
 
-export const showMore = new ShowMore({ selector: '.show-more', hidden: true });
+const showMore = new ShowMore({ selector: '.show-more', hidden: true });
 
 const nextOptions = {
   nextPage: 1,
@@ -88,7 +88,7 @@ showMore.refs.blockShowMore.addEventListener('click', onShowMoreClick);
 async function onShowMoreClick() {
   showMore.disable();
 
-  await nextOptions.addNextTrendingMovies(paginationStart._currentPage);
+  await nextOptions.addNextTrendingMovies();
 
   paginationStart.off();
   paginationStart.on('afterMove', updateMoviesListByShowMore);
