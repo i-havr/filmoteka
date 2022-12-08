@@ -17,5 +17,3 @@ function onOpen(e) {
 function onClose() {
   refs.backdrop.classList.toggle('hidden');
 }
-
-
