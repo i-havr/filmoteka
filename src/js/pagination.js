@@ -1,16 +1,15 @@
 import Pagination from 'tui-pagination';
 // import 'tui-pagination/dist/tui-pagination.css';
 import { getTrendMovies } from './gallery';
-// import { getMovies1 } from './search';
 import moveUp from './move-up';
 import refs from './refs';
 
-export function makePaginationOptions(totalResults = 10000) {
+export function makePaginationOptions(totalResults = 10000, currentPage = 1) {
   return {
     totalItems: totalResults,
     itemsPerPage: 20,
     visiblePages: 5,
-    page: 1,
+    page: currentPage,
     centerAlign: true,
     firstItemClassName: 'tui-first-child',
     lastItemClassName: 'tui-last-child',
