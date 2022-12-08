@@ -8,6 +8,7 @@ import refs from './refs';
 
 let searchValue = 'cat';
 const isHeaderMain = refs.header.classList.contains('header--home');
+
 if (isHeaderMain) {
   startGallery();
   refs.searchForm.addEventListener('submit', onSubmitForm);

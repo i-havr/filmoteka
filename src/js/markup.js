@@ -9,8 +9,11 @@ import { markupGenres, markupGenresLibrary } from './genres';
 // Відмальовка карток в Фільмотеки
 export function markupFilmoteka(dataArr) {
   const markup = dataArr.map(markupCard).join('');
+  const isHeaderMain = refs.header.classList.contains('header--home');
+  if (isHeaderMain) {
 
-  refs.filmotekaList.insertAdjacentHTML('beforeend', markup);
+    refs.filmotekaList.insertAdjacentHTML('beforeend', markup);
+  }
 }
 
 // Відмальовка карток в Бібліотеці
