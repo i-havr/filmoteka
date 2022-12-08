@@ -8,8 +8,11 @@ let GENRES = [0];
 
 export function markupFilmoteka(dataArr) {
   const markup = dataArr.map(markupCard).join('');
+  const isHeaderMain = refs.header.classList.contains('header--home');
+  if (isHeaderMain) {
 
-  refs.filmotekaList.insertAdjacentHTML('beforeend', markup);
+    refs.filmotekaList.insertAdjacentHTML('beforeend', markup);
+  }
 }
 export function markupCard(imgObj) {
   const base_url = 'https://image.tmdb.org/t/p/';
@@ -25,7 +28,6 @@ export function markupCard(imgObj) {
     date = 'No information';
   }
   const genres = markupGenres(imgObj.genre_ids);
-
 
   return `<li class="grid__item filmoteka__item" data-id="${imgObj.id}">
 			<div class="card" data-id="${imgObj.id}">

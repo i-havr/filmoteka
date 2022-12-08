@@ -26,9 +26,6 @@ try {
 try {
   refs.watchedBtn.addEventListener('click', addLibraryListWatched);
 } catch (error) {}
-try {
-  refs.queueBtn.addEventListener('click', removeLibraryListWatched);
-} catch (error) {}
 
 createWatched();
 async function createWatched() {
@@ -78,13 +75,13 @@ async function addWatched(event) {
       JSON.parse(event.target.offsetParent.children[2].children[0].dataset.id)
     );
 
-    await watchedFilmId.splice(namberFilm, 1);
-    await watchedFilm.splice(namberFilm, 1);
-    await localStorage.removeItem('watchedId');
-    await localStorage.removeItem('watched');
+    watchedFilmId.splice(namberFilm, 1);
+    watchedFilm.splice(namberFilm, 1);
+    localStorage.removeItem('watchedId');
+    localStorage.removeItem('watched');
 
-    await localStorage.setItem('watchedId', JSON.stringify(watchedFilmId));
-    await localStorage.setItem('watched', JSON.stringify(watchedFilm));
+    localStorage.setItem('watchedId', JSON.stringify(watchedFilmId));
+    localStorage.setItem('watched', JSON.stringify(watchedFilm));
     return;
   }
 
@@ -111,7 +108,7 @@ async function addWatched(event) {
 }
 
 // Створення контенту My library watched
-async function addLibraryListWatched() {
+export async function addLibraryListWatched() {
   try {
     refs.libraryList.innerHTML = '';
     refs.watchedBtn.classList.add('button--active');
@@ -166,12 +163,4 @@ function markupGenres(genre_ids) {
     genres.push(genre.name);
   }
   return genres.join(', ');
-}
-
-// Видалення переглянутого контенту
-function removeLibraryListWatched() {
-  refs.libraryList.innerHTML = '';
-
-  refs.watchedBtn.classList.remove('button--active');
-  refs.queueBtn.classList.add('button--active');
 }

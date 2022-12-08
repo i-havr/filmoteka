@@ -1,4 +1,5 @@
 import { Movies } from './fetch';
+import foto from '../images/poster/poster-not-found-main.jpg';
 
 const APIKey = 'e0e51fe83e5367383559a53110fae0e8';
 
@@ -8,7 +9,7 @@ const refs = {
   libraryList: document.querySelector('#library-list'),
   queueBtn: document.querySelector('#queue-btn'),
   watchedBtn: document.querySelector('#watched-btn'),
-}
+};
 
 let GENRES = [0];
 
@@ -17,30 +18,28 @@ refs.modal.addEventListener('click', addToQueue);
 const isMyLibMain = refs.header.classList.contains('header--mylib');
 if (isMyLibMain) {
   refs.queueBtn.addEventListener('click', addLibraryListQueue);
-  refs.watchedBtn.addEventListener('click', removeLibraryListQueue);
 }
+Start();
 
 async function Start() {
   await getGenres();
 
   await checkQueue();
-
-  await addLibraryListQueue();
 }
-
 
 let queueFilm = [];
 let queueFilmId = [];
 
-
 async function addToQueue(event) {
-  if (event.target.nodeName !== 'BUTTON' ||
-    event.target.id !== 'modal__button-queue') {
+  if (
+    event.target.nodeName !== 'BUTTON' ||
+    event.target.id !== 'modal__button-queue'
+  ) {
     return;
   }
-  
+
   const movies = new Movies(APIKey);
-    
+
   if (event.target.classList[1] === 'modal__button--active') {
     event.target.textContent = 'add to Queue';
     event.target.classList.add('modal__button');
@@ -50,13 +49,13 @@ async function addToQueue(event) {
       JSON.parse(event.target.offsetParent.children[2].children[0].dataset.id)
     );
 
-    await queueFilmId.splice(namberFilm, 1);
-    await queueFilm.splice(namberFilm, 1);
-    await localStorage.removeItem('queueId');
-    await localStorage.removeItem('queue');
+    queueFilmId.splice(namberFilm, 1);
+    queueFilm.splice(namberFilm, 1);
+    localStorage.removeItem('queueId');
+    localStorage.removeItem('queue');
 
-    await localStorage.setItem('queueId', JSON.stringify(queueFilmId));
-    await localStorage.setItem('queue', JSON.stringify(queueFilm));
+    localStorage.setItem('queueId', JSON.stringify(queueFilmId));
+    localStorage.setItem('queue', JSON.stringify(queueFilm));
     return;
   }
 
@@ -89,8 +88,7 @@ async function checkQueue() {
   }
 }
 
-async function addLibraryListQueue() {
-  
+export async function addLibraryListQueue() {
   try {
     refs.libraryList.innerHTML = '';
     refs.queueBtn.classList.add('button--active');
@@ -98,20 +96,23 @@ async function addLibraryListQueue() {
   } catch (error) { }
 
   if (localStorage.getItem('queue')) {
-    Start();
     for (const film of queueFilm) {
       try {
-        
         refs.libraryList.insertAdjacentHTML('beforeend', markupCard(film));
       } catch (error) { }
     }
   }
 }
 
-
 function markupCard(imgObj) {
-  const URI = `https://image.tmdb.org/t/p/w500${imgObj.poster_path}`;
-  const date = new Date(imgObj.release_date);
+  let URI = `https://image.tmdb.org/t/p/w500${imgObj.poster_path}`;
+  if (imgObj.poster_path === null) {
+    URI = foto;
+  }
+  let date = new Date(imgObj.release_date).getFullYear();
+  if (Number.isNaN(Number(date))) {
+    date = 'No information';
+  }
   const genres = markupGenres(imgObj.genres);
 
   return `<li class="grid__item filmoteka__item" data-id="${imgObj.id}">
@@ -121,7 +122,7 @@ function markupCard(imgObj) {
 				</div>
                     <div class="card__wrapper">
                         <h2 class="card__title title">${imgObj.title}</h2>
-                        <p class="card__desc">${genres} | ${date.getFullYear()}
+                        <p class="card__desc">${genres} | ${date}
                         <span class="card__vote">
                             ${imgObj.vote_average.toFixed(1)}
                         </span>
@@ -132,6 +133,9 @@ function markupCard(imgObj) {
 }
 
 function markupGenres(genre_ids) {
+  if (genre_ids.length === 0) {
+    return 'No information';
+  }
   let genres = [];
   for (const genre of genre_ids) {
     genres.push(genre.name);
@@ -147,14 +151,3 @@ async function getGenres() {
     console.log(error.message);
   }
 }
-
-function removeLibraryListQueue() {
-  refs.libraryList.innerHTML = '';
-
-  refs.queueBtn.classList.remove('button--active');
-  refs.watchedBtn.classList.add('button--active');
-}
-
-
-
-

@@ -6,6 +6,7 @@ import refs from './refs';
 
 let searchValue = 'cat';
 const isHeaderMain = refs.header.classList.contains('header--home');
+
 if (isHeaderMain) {
   refs.searchForm.addEventListener('submit', onSubmitForm);
 }
@@ -34,7 +35,6 @@ export async function getTrendMovies(page) {
 
   try {
     const { results } = await movies.getTrendingMovies(page);
-    console.log('results ', results);
 
     if (results.length === 0) {
       throw new Error(

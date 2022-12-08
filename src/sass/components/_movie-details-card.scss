@@ -129,6 +129,13 @@ table {
   font-weight: 500;
   font-size: 12px;
   line-height: 1.67;
+  @include mq(tab) {
+    max-height: 120px;
+    overflow-y: auto;
+  }
+  @include mq(desk) {
+    max-height: 175px;
+  }
 }
 
 .movie-details__preview-wrapper {
@@ -136,9 +143,17 @@ table {
 }
 
 .movie-details__button-trailer {
+  cursor: pointer;
   position: absolute;
-  bottom: 40px;
+  bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
-  cursor: pointer;
+  color: var(--accent-font-color);
+  border-color: var(--accent-font-color);
+  @include mq(tab) {
+    bottom: 67px;
+  }
+  @include mq(desk) {
+    bottom: 30px;
+  }
 }
