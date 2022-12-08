@@ -1,7 +1,8 @@
 import { Movies } from './fetch';
 import * as basicLightbox from 'basiclightbox';
-import 'basiclightbox/dist/basiclightbox.min.css';
+// import 'basiclightbox/dist/basiclightbox.min.css';
 import { APIKey } from './markup';
+import createBtnWatched from './watched-create-btn';
 const bodyScrollLock = require('body-scroll-lock');
 import foto from '../images/poster/poster-not-found-desk.jpg';
 
@@ -166,11 +167,13 @@ export default class ModalMovie {
     <p class="movie-details__text">${overview}</p></div>
     <div class="movie-details__buttons">
     <button class="button modal__button" type="button" id="modal__watched-button">Add to Watched</button>
-    <button id="modal__button-queue" class="button" type="button">Add to Queue</button>
+    <button id="modal__button-queue" class="button modal__button" type="button">Add to Queue</button>
     </div>
     </div>
     `;
     this.modalContent.insertAdjacentHTML('beforeend', markup);
+
+    createBtnWatched(id);
 
     if (video) {
       this.startListenTrailerClick(id);
@@ -208,5 +211,3 @@ const refs = {
 };
 
 new ModalMovie(refs, IMAGE_URL, APIKey).init();
-
-// Привіт я тут просто так
