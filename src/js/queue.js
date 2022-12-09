@@ -79,11 +79,7 @@ function checkQueue() {
   if (localStorage.getItem('queue')) {
     queueFilm = JSON.parse(localStorage.getItem('queue'));
     queueFilmId = JSON.parse(localStorage.getItem('queueId'));
-    if (!queueFilm) {
-      refs.subtitle.classList.remove('visually-hidden');
-    }
   }
-  refs.subtitle.classList.add('visually-hidden');
 }
 
 export async function addLibraryListQueue() {
@@ -93,13 +89,16 @@ export async function addLibraryListQueue() {
     refs.watchedBtn.classList.remove('button--active');
   } catch (error) {}
 
+  if (!localStorage.getItem('queue')) {
+    refs.subtitle.classList.remove('visually-hidden');
+  }
+
   if (localStorage.getItem('queue')) {
+    refs.subtitle.classList.add('visually-hidden');
     markupMyLibrary(queueFilm);
-    // for (const film of queueFilm) {
-    //   try {
-    //     refs.libraryList.insertAdjacentHTML('beforeend', markupCardLib(film));
-    //   } catch (error) {}
-    // }
+    if (!queueFilm.length) {
+      refs.subtitle.classList.remove('visually-hidden');
+    }
   }
 }
 

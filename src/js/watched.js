@@ -44,16 +44,19 @@ function checkWatched() {
   if (localStorage.getItem('watched')) {
     watchedFilm = JSON.parse(localStorage.getItem('watched'));
     watchedFilmId = JSON.parse(localStorage.getItem('watchedId'));
-    // refs.subtitle.classList.remove('visually-hidden');
-    if (!watchedFilm.length) {
-      console.log('watchedFilm ', watchedFilm.length);
-      refs.subtitle.classList.remove('visually-hidden');
-      console.log('refs.subtitle ', refs.subtitle);
-    }
-    return;
+    // if (!watchedFilm.length) {
+    //   console.log('watchedFilm ', watchedFilm.length);
+    //   refs.subtitle.classList.remove('visually-hidden');
+    //   console.log('refs.subtitle ', refs.subtitle);
+    //   // return;
+    // }
+    // refs.subtitle.classList.add('visually-hidden');
+    // return;
   }
-  console.log('refs.subtitle ', refs.subtitle);
-  refs.subtitle.classList.remove('visually-hidden');
+  // if (!localStorage.getItem('watched')) {
+  //   refs.subtitle.classList.remove('visually-hidden');
+  //   console.log('refs.subtitle 1', refs.subtitle);
+  // }
 }
 
 // Запис в LocalStorage
@@ -114,7 +117,18 @@ export async function addLibraryListWatched() {
     refs.queueBtn.classList.remove('button--active');
   } catch (error) {}
 
+  if (!localStorage.getItem('watched')) {
+    refs.subtitle.classList.remove('visually-hidden');
+  }
+
   if (localStorage.getItem('watched')) {
+    refs.subtitle.classList.add('visually-hidden');
     markupMyLibrary(watchedFilm);
+    if (!watchedFilm.length) {
+      console.log('watchedFilm ', watchedFilm.length);
+      refs.subtitle.classList.remove('visually-hidden');
+      console.log('refs.subtitle ', refs.subtitle);
+      // return;
+    }
   }
 }
