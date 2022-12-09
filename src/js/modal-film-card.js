@@ -170,7 +170,7 @@ export default class ModalMovie {
         <img class="movie-details__img" src="${img}"/>
         ${
           video
-            ? '<button class="button movie-details__button-trailer modal__button" data-trailer type="button">Show trailer</button>'
+            ? '<button class="button movie-details__button-trailer modal__button visually-hidden" data-trailer type="button">Show trailer</button>'
             : ''
         }
     </div>
@@ -203,17 +203,24 @@ export default class ModalMovie {
     }
   }
 
-  startListenTrailerClick(id) {
+  async startListenTrailerClick(id) {
     const trailerRun = this.modalContent.querySelector('[data-trailer]');
 
+    const movies = new Movies(this.APIKey);
+    const { results } = await movies.getMovieTrailers(id);
+
+    // Якщо немає результатів, то нічого не робимо
+    if (!results.length) return;
+
+    const youTubeVideo = results.find(
+      vid => vid.site === 'YouTube' && vid.type === 'Trailer'
+    );
+
+    // Якщо немає трейлерів, то нічого не робимо
+    if (!youTubeVideo) return;
+
+    trailerRun.classList.remove('visually-hidden');
     trailerRun.addEventListener('click', async () => {
-      const movies = new Movies(this.APIKey);
-      const { results } = await movies.getMovieTrailers(id);
-
-      if (!results.length) return; //Якщо немає трейлера, то нічого не робимо
-
-      const youTubeVideo = results.find(vid => vid.site === 'YouTube');
-
       const instance = basicLightbox.create(`
         <iframe src="https://www.youtube.com/embed/${youTubeVideo.key}" width="560" height="315" frameborder="0"></iframe>
       `);
