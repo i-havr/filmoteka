@@ -11,6 +11,11 @@ import {
   makePaginationOptions,
 } from './pagination';
 import moveUp from './move-up';
+import { showMore } from './gallery';
+
+const SEARCH_STORAGE_KEY = 'search-query';
+
+const movies = new Movies(APIKey);
 
 let searchValue = 'cat';
 const isHeaderMain = refs.header.classList.contains('header--home');
@@ -18,9 +23,12 @@ if (isHeaderMain) {
   refs.searchForm.addEventListener('submit', onSubmitForm);
 }
 
-function onSubmitForm(evt) {
+async function onSubmitForm(evt) {
   evt.preventDefault();
+  localStorage.removeItem(SEARCH_STORAGE_KEY);
+
   searchValue = evt.currentTarget.elements.searchQuery.value;
+  localStorage.setItem(SEARCH_STORAGE_KEY, searchValue);
   clearFilmoteka();
   addLoadingSpinner();
 
@@ -31,13 +39,11 @@ async function startSearch() {
   // await getGenres();
 
   await getMoviesBySearch();
-
+  showMore.hide();
   removeLoadingSpinner();
 }
 
-async function getMoviesBySearch(page) {
-  const movies = new Movies(APIKey);
-
+async function getMoviesBySearch(page = 1) {
   try {
     const { results, total_results } = await movies.searchMovies(
       searchValue,
@@ -54,6 +60,8 @@ async function getMoviesBySearch(page) {
     clearFilmoteka();
 
     markupFilmoteka(results);
+
+    moveUp();
   } catch (error) {
     console.log(error.name);
     console.log(error.message);
@@ -75,17 +83,14 @@ function onInvalidSearchQuery() {
 }
 
 // Pagination
-
-async function getPaginationBySearch(total_results, page) {
-  const paginationOptions = makePaginationOptions(total_results, page);
-
-  paginationStart.off('afterMove', updateMoviesList);
-
+async function getPaginationBySearch(total_pages, page) {
+  const paginationOptions = makePaginationOptions(total_pages, page);
   const paginationBySearch = new Pagination(
     refs.paginationContainer,
     paginationOptions
   );
 
+  paginationStart.off('afterMove', updateMoviesList);
   paginationBySearch.on('afterMove', updateMoviesListBySearch);
 
   moveUp();
@@ -93,8 +98,6 @@ async function getPaginationBySearch(total_results, page) {
 
 async function updateMoviesListBySearch(event) {
   const currentPageBySearch = event.page;
-
-  console.log('currentPageBySearch -->', currentPageBySearch);
 
   await getMoviesBySearch(currentPageBySearch);
 }
