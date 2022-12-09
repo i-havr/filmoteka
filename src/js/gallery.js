@@ -6,7 +6,7 @@ import refs from './refs';
 import ShowMore from './show-more-btn';
 
 const movies = new Movies(APIKey);
-const showMore = new ShowMore({ selector: '.show-more', hidden: true });
+export const showMore = new ShowMore({ selector: '.show-more', hidden: true });
 
 let searchValue = 'cat';
 const isHeaderMain = refs.header.classList.contains('header--home');
@@ -33,7 +33,7 @@ async function startGallery() {
 }
 
 // Page from pagination
-export async function getTrendMovies(page) {
+export async function getTrendMovies(page = 1) {
   try {
     const { results, total_pages } = await movies.getTrendingMovies(page);
     console.log('results ', results);

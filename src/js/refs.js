@@ -3,4 +3,5 @@ export default {
   filmotekaList: document.querySelector('#filmoteka-list'),
   header: document.querySelector('.header'),
   paginationContainer: document.getElementById('pagination'),
+  showMoreBtn: document.querySelector('.show-more'),
 };

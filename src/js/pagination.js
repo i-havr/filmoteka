@@ -5,11 +5,12 @@ import moveUp from './move-up';
 import refs from './refs';
 import { Movies } from './fetch';
 import { markupFilmoteka, APIKey } from './markup';
-import ShowMore from './show-more-btn';
+// import ShowMore from './show-more-btn';
+import { showMore } from './gallery';
 
 const movies = new Movies(APIKey);
 
-const showMore = new ShowMore({ selector: '.show-more', hidden: true });
+// export const showMore = new ShowMore({ selector: '.show-more', hidden: true });
 
 const nextOptions = {
   nextPage: 1,
