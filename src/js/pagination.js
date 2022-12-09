@@ -4,7 +4,8 @@ import { getTrendMovies, getAppendMovies } from './gallery';
 import moveUp from './move-up';
 import refs from './refs';
 import { Movies } from './fetch';
-import { markupFilmoteka, APIKey } from './markup';
+import { markupFilmoteka } from './markup';
+import { APIKey } from './apikey';
 // import ShowMore from './show-more-btn';
 import { showMore } from './gallery';
 
@@ -20,6 +21,7 @@ const nextOptions = {
       const { results, total_pages } = await movies.getTrendingMovies(
         this.nextPage
       );
+      console.log(results);
       markupFilmoteka(results);
       showMore.enable();
 
