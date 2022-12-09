@@ -150,13 +150,10 @@ table {
   transform: translateX(-50%);
   color: var(--accent-font-color);
   border-color: var(--accent-font-color);
-  background-color: #8c8c8c;
+  background-color: #201c1c;
   opacity: 0.7;
   @include mq(tab) {
-    bottom: 67px;
-  }
-  @include mq(desk) {
-    bottom: 30px;
+    bottom: 33px;
   }
 }
 .movie-details__buttons {
