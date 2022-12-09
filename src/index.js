@@ -9,7 +9,5 @@ import './js/pagination';
 import './js/watched';
 import './js/arrow-up';
 import './js/show-more-btn';
-
-import './js/read-more';
 import './js/theme';
 import './js/queue';

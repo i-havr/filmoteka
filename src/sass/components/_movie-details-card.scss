@@ -157,3 +157,12 @@ table {
     bottom: 30px;
   }
 }
+.movie-details__buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  @include mq(tab) {
+    gap: 15px;
+  }
+}
