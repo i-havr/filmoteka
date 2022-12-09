@@ -65,6 +65,7 @@ export function markupCardLibrary(imgObj) {
     date = 'No information';
   }
   const genres = markupGenresLibrary(imgObj.genres);
+  console.log('genres ', genres);
 
   return `<li class="grid__item filmoteka__item" data-id="${imgObj.id}">
 			<div class="card" data-id="${imgObj.id}">
