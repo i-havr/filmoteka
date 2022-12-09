@@ -164,6 +164,7 @@ export default class ModalMovie {
     vote_average = vote_average.toFixed(1);
     popularity = popularity.toFixed(1);
 
+    video = true;
     const markup = `
     <div class="movie-details__preview-wrapper" data-id="${id}">
         <img class="movie-details__img" src="${img}"/>
@@ -208,6 +209,8 @@ export default class ModalMovie {
     trailerRun.addEventListener('click', async () => {
       const movies = new Movies(this.APIKey);
       const { results } = await movies.getMovieTrailers(id);
+
+      if (!results.length) return; //Якщо немає трейлера, то нічого не робимо
 
       const youTubeVideo = results.find(vid => vid.site === 'YouTube');
 
