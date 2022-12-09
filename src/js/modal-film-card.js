@@ -5,8 +5,9 @@ import createBtnWatched from './watched-create-btn';
 import createBtnQueue from './queue-create-btn';
 import { addLibraryListWatched } from './watched';
 import { addLibraryListQueue } from './queue';
-const bodyScrollLock = require('body-scroll-lock');
 import foto from '../images/poster/poster-not-found-desk.jpg';
+
+const bodyScrollLock = require('body-scroll-lock');
 
 export default class ModalMovie {
   constructor(
