@@ -21,7 +21,6 @@ const nextOptions = {
       const { results, total_pages } = await movies.getTrendingMovies(
         this.nextPage
       );
-      console.log(results);
       markupFilmoteka(results);
       showMore.enable();
 
@@ -79,8 +78,6 @@ export async function updateMoviesList(event) {
   const currentPageStart = event.page;
   nextOptions.nextPage = currentPageStart;
 
-  console.log('currentPageStart -->', currentPageStart);
-
   await getTrendMovies(currentPageStart);
 
   moveUp();
@@ -96,16 +93,12 @@ async function onShowMoreClick() {
   paginationStart.off();
   paginationStart.on('afterMove', updateMoviesListByShowMore);
   paginationStart.movePageTo(nextOptions.nextPage);
-  console.log('nextPage after showMore -->', nextOptions.nextPage);
   paginationStart.off();
   paginationStart.on('afterMove', updateMoviesList);
 }
 
 export function updateMoviesListByShowMore(event) {
-  console.log('event.page -->', event.page);
-
   nextOptions.nextPage = event.page;
-  console.log('nextPage in updateMoviesList -->', nextOptions.nextPage);
 
   getAppendMovies(event.page);
 }
