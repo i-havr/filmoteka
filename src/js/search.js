@@ -37,8 +37,6 @@ async function onSubmitForm(evt) {
 }
 
 async function startSearch() {
-  // await getGenres();
-
   await getMoviesBySearch();
   showMore.hide();
   removeLoadingSpinner();

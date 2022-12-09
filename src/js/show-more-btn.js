@@ -2,9 +2,6 @@ export default class ShowMore {
   constructor({ selector, hidden = false }) {
     this.refs = this.getRefs(selector);
     hidden && this.hide();
-    //   if (hidden) {
-    //       this.hide();
-    //   }
   }
 
   getRefs(selector) {

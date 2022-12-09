@@ -1,10 +1,6 @@
-// import { Movies } from './fetch';
 import refs from './refs';
 import foto from '../images/poster/poster-not-found-main.jpg';
-// import { APIKey } from './apikey';
 import { markupGenres, markupGenresLibrary } from './genres';
-
-// let GENRES = [0];
 
 // Відмальовка карток в Фільмотеки
 export function markupFilmoteka(dataArr) {
