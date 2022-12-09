@@ -36,8 +36,6 @@ async function onSubmitForm(evt) {
 }
 
 async function startSearch() {
-  // await getGenres();
-
   await getMoviesBySearch();
   showMore.hide();
   removeLoadingSpinner();
@@ -52,7 +50,7 @@ async function getMoviesBySearch(page = 1) {
 
     await getPaginationBySearch(total_results, page);
 
-    if (results.length === 0) {
+    if (!results.length) {
       onInvalidSearchQuery();
       return;
     }

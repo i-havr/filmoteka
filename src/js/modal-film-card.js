@@ -7,7 +7,6 @@ import { addLibraryListWatched } from './watched';
 import { addLibraryListQueue } from './queue';
 const bodyScrollLock = require('body-scroll-lock');
 import foto from '../images/poster/poster-not-found-desk.jpg';
-// import { markupGenresLibrary } from './genres';
 
 export default class ModalMovie {
   constructor(
@@ -143,15 +142,14 @@ export default class ModalMovie {
     } = data;
 
     let img = `${this.IMAGE_URL}${poster_path}`;
-    if (poster_path === null) {
+    if (!poster_path) {
       img = foto;
     }
 
-    if (overview.length === 0) {
+    if (!overview.length) {
       overview = 'There is no description';
     }
-    // genres = markupGenresLibrary(genres);
-    if (genres.length === 0) {
+    if (!genres.length) {
       genres = [
         {
           id: 0,

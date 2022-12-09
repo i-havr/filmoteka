@@ -8,7 +8,6 @@ function initGenres() {
 
 async function updateGenresInLS() {
   if (localStorage.getItem('genres')) return;
-  // console.log('updateGenresInLS');
 
   const movies = new Movies(APIKey);
   try {
@@ -19,8 +18,6 @@ async function updateGenresInLS() {
   }
 }
 
-//Повертає рядок жанрів для карток Фільмотеки
-//genre_ids - масив айдішок жанрів
 export function markupGenres(genre_ids) {
   if (!genre_ids.length) {
     return 'No information';
@@ -29,7 +26,6 @@ export function markupGenres(genre_ids) {
   const allGenres = getGenres();
   let genres = [];
 
-  // genre_ids.map(genre_id => {
   for (let i = 0; i < genre_ids.length; i++) {
     if (i > 2) {
       genres.splice(i - 1, 1, 'Other');
@@ -47,8 +43,6 @@ export function markupGenres(genre_ids) {
   return genres.join(', ');
 }
 
-//Повертає рядок жанрів для карток Бібліотеки
-//genres - масив об'єктів жанрів [{id: 16, name: 'Animation'}...]
 export function markupGenresLibrary(genres) {
   if (!genres.length) {
     genres = [
@@ -69,7 +63,6 @@ export function markupGenresLibrary(genres) {
   return genres.map(item => item.name).join(', ');
 }
 
-//Повертає масив об'єктів жанрів {id: 16, name: 'Animation'}
 function getGenres() {
   if (!localStorage.getItem('genres')) {
     document.location.reload();
