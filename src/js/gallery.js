@@ -6,20 +6,20 @@ import { markupFilmoteka } from './markup';
 import { APIKey } from './apikey';
 import refs from './refs';
 
-let searchValue = 'cat';
+// let searchValue = 'cat';
 const isHeaderMain = refs.header.classList.contains('header--home');
 
 if (isHeaderMain) {
   startGallery();
-  refs.searchForm.addEventListener('submit', onSubmitForm);
+  // refs.searchForm.addEventListener('submit', onSubmitForm);
 }
 
-function onSubmitForm(evt) {
-  evt.preventDefault();
-  searchValue = evt.currentTarget.elements.searchQuery.value;
-  clearFilmoteka();
-  startGallery();
-}
+// function onSubmitForm(evt) {
+//   evt.preventDefault();
+//   searchValue = evt.currentTarget.elements.searchQuery.value;
+//   clearFilmoteka();
+//   startGallery();
+// }
 
 async function startGallery() {
   addLoadingSpinner();
