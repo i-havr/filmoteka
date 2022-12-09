@@ -53,7 +53,7 @@ async function getMoviesBySearch(page = 1) {
 
     await getPaginationBySearch(total_results, page);
 
-    if (results.length === 0) {
+    if (!results.length) {
       onInvalidSearchQuery();
       refs.paginationContainer.classList.add('visually-hidden');
       refs.subtitle.classList.remove('visually-hidden');

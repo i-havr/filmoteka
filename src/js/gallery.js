@@ -39,7 +39,7 @@ export async function getTrendMovies(page = 1) {
   try {
     const { results, total_pages } = await movies.getTrendingMovies(page);
 
-    if (results.length === 0) {
+    if (!results.length) {
       refs.subtitle.classList.remove('visually-hidden');
       throw new Error(
         'Sorry, there are no movies matching your search query. Please try again.'
