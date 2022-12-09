@@ -139,7 +139,6 @@ export default class ModalMovie {
       original_title,
       genres,
       overview,
-      video,
       id,
     } = data;
 
@@ -164,15 +163,10 @@ export default class ModalMovie {
     vote_average = vote_average.toFixed(1);
     popularity = popularity.toFixed(1);
 
-    video = true;
     const markup = `
     <div class="movie-details__preview-wrapper" data-id="${id}">
         <img class="movie-details__img" src="${img}"/>
-        ${
-          video
-            ? '<button class="button movie-details__button-trailer modal__button visually-hidden" data-trailer type="button">Show trailer</button>'
-            : ''
-        }
+          <button class="button movie-details__button-trailer modal__button visually-hidden" data-trailer type="button">Show trailer</button>
     </div>
     <div class="movie-details__thumb">
     <div class="movie-details__content"><h3 class="movie-details__title">${title}</h3>
@@ -198,9 +192,7 @@ export default class ModalMovie {
     createBtnWatched(id);
     createBtnQueue(id);
 
-    if (video) {
-      this.startListenTrailerClick(id);
-    }
+    this.startListenTrailerClick(id);
   }
 
   async startListenTrailerClick(id) {
