@@ -7,7 +7,7 @@ import { addLibraryListWatched } from './watched';
 import { addLibraryListQueue } from './queue';
 const bodyScrollLock = require('body-scroll-lock');
 import foto from '../images/poster/poster-not-found-desk.jpg';
-import { markupGenresLibrary } from './genres';
+// import { markupGenresLibrary } from './genres';
 
 export default class ModalMovie {
   constructor(
@@ -150,16 +150,16 @@ export default class ModalMovie {
     if (overview.length === 0) {
       overview = 'There is no description';
     }
-    genres = markupGenresLibrary(genres);
-    // if (genres.length === 0) {
-    //   genres = [
-    //     {
-    //       id: 0,
-    //       name: 'No information',
-    //     },
-    //   ];
-    // }
-    // genres = genres.map(item => item.name).join(', ');
+    // genres = markupGenresLibrary(genres);
+    if (genres.length === 0) {
+      genres = [
+        {
+          id: 0,
+          name: 'No information',
+        },
+      ];
+    }
+    genres = genres.map(item => item.name).join(', ');
     vote_average = vote_average.toFixed(1);
     popularity = popularity.toFixed(1);
 
