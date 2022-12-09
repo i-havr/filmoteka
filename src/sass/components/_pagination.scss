@@ -232,3 +232,30 @@
   padding: 8px 0 6px;
   vertical-align: top;
 }
+
+.tui-pagination .tui-prev-is-ellip,
+.tui-pagination .tui-next-is-ellip,
+.tui-pagination .tui-last,
+.tui-pagination .tui-first {
+  @include mq(mob-only) {
+    display: none;
+  }
+}
+
+.tui-pagination .tui-page-btn,
+.tui-pagination .tui-first,
+.tui-pagination .tui-prev,
+.tui-pagination .tui-next,
+.tui-pagination .tui-last,
+.tui-pagination .tui-prev-is-ellip,
+.tui-pagination .tui-next-is-ellip,
+.tui-pagination .tui-first + .tui-prev,
+.tui-pagination .tui-next + .tui-last {
+  @media screen and (max-width: 480px) {
+    margin: 0;
+  }
+}
+
+.library__pagination {
+  visibility: hidden;
+}

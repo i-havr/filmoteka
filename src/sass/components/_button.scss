@@ -5,8 +5,10 @@
   justify-content: center;
   align-items: center;
   gap: 10px;
-  padding: 12px 20px;
+  padding: 12px;
   min-width: 130px;
+  margin-top: 2px;
+  margin-bottom: 2px;
 
   font-weight: 500;
   font-size: 12px;
@@ -17,7 +19,6 @@
   color: var(--main-light-color);
   background-color: transparent;
   border-radius: 5px;
-  // border: 0;
   border: 1px solid var(--main-light-color);
 
   transition: color var(--animation), background-color var(--animation),
@@ -54,4 +55,3 @@
     box-shadow: var(--btn-box-shadow);
   }
 }
-

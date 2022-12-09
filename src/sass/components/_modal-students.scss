@@ -5,36 +5,44 @@
   width: 100%;
   height: 100%;
   visibility: visible;
-
   background-color: rgb(0 0 0 / 0.25);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+}
+
+.my-modal {
   opacity: 1;
   transition: opacity var(--animation), visibility var(--animation);
 }
 
-.my-backdrop.hidden {
+.my-modal.hidden {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
 }
 
-.my-modal {
+.my-modal-content {
   position: fixed;
   left: 50%;
   top: 50%;
+  z-index: 1001;
 
-  padding: 48px 20px 40px;
+  padding: 48px 20px 0px;
   width: 90%;
-  max-width: 380px;
   max-height: 100%;
   overflow-y: auto;
-
-  background-color: #fff;
+  max-width: 300px;
+  background-color: #393636;
 
   transform: translate(-50%, -50%) scale(1);
   transition: transform var(--animation);
 
   .backdrop.is-hidden & {
     transform: translate(-50%, -50%) scale(0.9);
+  }
+
+  @include mq(tab) {
+    max-width: 625px;
   }
 }
 
@@ -50,4 +58,45 @@
   border: none;
   outline: none;
   cursor: pointer;
+  fill: var(--accent-font-color);
+}
+
+.list-students {
+  margin: 0;
+  list-style: none;
+  padding: 0;
+  gap: 0 3%;
+  @include mq(tab) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 3%;
+    padding: 0;
+  }
+
+  .item {
+    display: flex;
+    flex-direction: column;
+    flex: 1 30%;
+  }
+
+  .name {
+    color: var(--accent-font-color);
+    text-align: center;
+    margin-top: 10px;
+    @include mq(tab) {
+      margin-top: 10px;
+    }
+  }
+}
+
+.position {
+  color: var(--second-font-color);
+  text-align: center;
+  margin-top: 8px;
+  margin-bottom: 10px;
+  @include mq(tab) {
+    margin-top: 10px;
+  }
+
+  font-size: 12px;
 }

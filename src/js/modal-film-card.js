@@ -1,7 +1,6 @@
 import { Movies } from './fetch';
 import * as basicLightbox from 'basiclightbox';
-// import 'basiclightbox/dist/basiclightbox.min.css';
-import { APIKey } from './markup';
+import { APIKey } from './apikey';
 import createBtnWatched from './watched-create-btn';
 import createBtnQueue from './queue-create-btn';
 import { addLibraryListWatched } from './watched';
@@ -142,13 +141,7 @@ export default class ModalMovie {
       video,
       id,
     } = data;
-    // console.log(overview.length);
-    // let text = '';
-    // if (overview.length > 300) {
-    //   text = overview.slice(0, 300);
-    //   console.log(text);
-    //   console.log(overview);
-    // }
+
     let img = `${this.IMAGE_URL}${poster_path}`;
     if (poster_path === null) {
       img = foto;

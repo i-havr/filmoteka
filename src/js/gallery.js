@@ -1,7 +1,9 @@
 import { addLoadingSpinner, removeLoadingSpinner } from './loading-spinner';
 import { Movies } from './fetch';
 import clearFilmoteka from './clear-filmoteka';
-import { markupFilmoteka, getGenres, APIKey } from './markup';
+import { markupFilmoteka } from './markup';
+// import { getGenres } from './genres';
+import { APIKey } from './apikey';
 import refs from './refs';
 import ShowMore from './show-more-btn';
 
@@ -10,7 +12,9 @@ export const showMore = new ShowMore({ selector: '.show-more', hidden: true });
 
 let searchValue = 'cat';
 const isHeaderMain = refs.header.classList.contains('header--home');
+
 if (isHeaderMain) {
+  startGallery();
   refs.searchForm.addEventListener('submit', onSubmitForm);
 }
 
@@ -21,12 +25,10 @@ function onSubmitForm(evt) {
   startGallery();
 }
 
-startGallery();
-
 async function startGallery() {
   addLoadingSpinner();
 
-  await getGenres();
+  // await getGenres();
   await getTrendMovies();
 
   removeLoadingSpinner();
@@ -36,7 +38,6 @@ async function startGallery() {
 export async function getTrendMovies(page = 1) {
   try {
     const { results, total_pages } = await movies.getTrendingMovies(page);
-    console.log('results ', results);
 
     if (results.length === 0) {
       throw new Error(

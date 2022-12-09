@@ -1,5 +1,6 @@
 import { Movies } from './fetch';
-import { markupFilmoteka, getGenres, APIKey } from './markup';
+import { markupFilmoteka } from './markup';
+import { APIKey } from './apikey';
 import { addLoadingSpinner, removeLoadingSpinner } from './loading-spinner';
 import clearFilmoteka from './clear-filmoteka';
 import refs from './refs';
@@ -9,8 +10,8 @@ import {
   updateMoviesList,
   makePaginationOptions,
 } from './pagination';
-import { showMore } from './gallery';
 import moveUp from './move-up';
+import { showMore } from './gallery';
 
 const SEARCH_STORAGE_KEY = 'search-query';
 
@@ -35,7 +36,8 @@ async function onSubmitForm(evt) {
 }
 
 async function startSearch() {
-  await getGenres();
+  // await getGenres();
+
   await getMoviesBySearch();
   showMore.hide();
   removeLoadingSpinner();
@@ -51,9 +53,6 @@ async function getMoviesBySearch(page = 1) {
     await getPaginationBySearch(total_results, page);
 
     if (results.length === 0) {
-      // throw new Error(
-      //   'Sorry, there are no movies matching your search query. Please try again.'
-      // );
       onInvalidSearchQuery();
       return;
     }
@@ -93,6 +92,8 @@ async function getPaginationBySearch(total_pages, page) {
 
   paginationStart.off('afterMove', updateMoviesList);
   paginationBySearch.on('afterMove', updateMoviesListBySearch);
+
+  moveUp();
 }
 
 async function updateMoviesListBySearch(event) {

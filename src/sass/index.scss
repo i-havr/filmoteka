@@ -6,6 +6,8 @@
 @import './utils/variables';
 @import './utils/mixin';
 
+@import '/node_modules/basiclightbox/dist/basicLightbox.min.css';
+
 // Base
 @import './base/base';
 @import './base/reset';
