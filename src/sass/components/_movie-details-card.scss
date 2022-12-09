@@ -150,6 +150,8 @@ table {
   transform: translateX(-50%);
   color: var(--accent-font-color);
   border-color: var(--accent-font-color);
+  background-color: #8c8c8c;
+  opacity: 0.7;
   @include mq(tab) {
     bottom: 67px;
   }
