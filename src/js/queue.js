@@ -21,8 +21,6 @@ if (isMyLibMain) {
 }
 
 async function Start() {
-  // await getGenres();
-
   checkQueue();
 }
 
@@ -48,8 +46,6 @@ async function addToQueue(event) {
 
     queueFilmId.splice(namberFilm, 1);
     queueFilm.splice(namberFilm, 1);
-    // localStorage.removeItem('queueId');
-    // localStorage.removeItem('queue');
 
     localStorage.setItem('queueId', JSON.stringify(queueFilmId));
     localStorage.setItem('queue', JSON.stringify(queueFilm));

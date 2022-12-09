@@ -26,7 +26,6 @@ let watchedFilmId = [];
 const isMyLibMain = refs.header.classList.contains('header--mylib');
 if (isMyLibMain) {
   createWatched();
-  // Слухачі подій
 
   try {
     refs.watchedBtn.addEventListener('click', addLibraryListWatched);
@@ -34,22 +33,10 @@ if (isMyLibMain) {
 }
 
 async function createWatched() {
-  // await createGenres();
-
   checkWatched();
 
   await addLibraryListWatched();
 }
-
-// Формування переліку жанрів
-// async function createGenres() {
-//   const movies = new Movies(APIKey);
-//   try {
-//     GENRES = await movies.getGenres();
-//   } catch (error) {
-//     console.log(error.message);
-//   }
-// }
 
 //  Витяг з LocalStorage
 function checkWatched() {
@@ -81,8 +68,6 @@ async function addWatched(event) {
 
     watchedFilmId.splice(namberFilm, 1);
     watchedFilm.splice(namberFilm, 1);
-    // localStorage.removeItem('watchedId');
-    // localStorage.removeItem('watched');
 
     localStorage.setItem('watchedId', JSON.stringify(watchedFilmId));
     localStorage.setItem('watched', JSON.stringify(watchedFilm));
@@ -121,51 +106,5 @@ export async function addLibraryListWatched() {
 
   if (localStorage.getItem('watched')) {
     markupMyLibrary(watchedFilm);
-    // for (const film of watchedFilm) {
-    //   try {
-    //     refs.libraryList.insertAdjacentHTML('beforeend', markupCardLib(film));
-    //   } catch (error) {}
-    // }
   }
 }
-
-// Створення однієї картки
-// function markupCard(imgObj) {
-//   let URI = `https://image.tmdb.org/t/p/w500${imgObj.poster_path}`;
-//   if (imgObj.poster_path === null) {
-//     URI = foto;
-//   }
-//   let date = new Date(imgObj.release_date).getFullYear();
-//   if (Number.isNaN(Number(date))) {
-//     date = 'No information';
-//   }
-//   const genres = markupGenres(imgObj.genres);
-
-//   return `<li class="grid__item filmoteka__item" data-id="${imgObj.id}">
-// 			<div class="card" data-id="${imgObj.id}">
-//                 <div class="card__img">
-// 					<img src="${URI}" alt="${imgObj.title}">
-// 				</div>
-//                     <div class="card__wrapper">
-//                         <h2 class="card__title title">${imgObj.title}</h2>
-//                         <p class="card__desc">${genres} | ${date}
-//                         <span class="card__vote">
-//                             ${imgObj.vote_average.toFixed(1)}
-//                         </span>
-//                         </p>
-//                     </div>
-//                 </div>
-// 			</li>`;
-// }
-
-// Створення жанрів в одну картку
-// function markupGenres(genre_ids) {
-//   if (genre_ids.length === 0) {
-//     return 'No information';
-//   }
-//   let genres = [];
-//   for (const genre of genre_ids) {
-//     genres.push(genre.name);
-//   }
-//   return genres.join(', ');
-// }

@@ -5,11 +5,12 @@
 
   min-width: 320px;
   max-width: 480px;
-  // background-color: var(--main-light-color);
+  min-height: 550px;
 
   @include mq(tab) {
     @include section(60px, 60px);
     max-width: 768px;
+    min-height: 850px;
   }
 
   @include mq(desk) {
