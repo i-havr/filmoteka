@@ -8,6 +8,7 @@ const refs = {
   libraryList: document.querySelector('#library-list'),
   queueBtn: document.querySelector('#queue-btn'),
   watchedBtn: document.querySelector('#watched-btn'),
+  subtitle: document.querySelector('.filmoteka__subtitle'),
 };
 
 refs.modal.addEventListener('click', addToQueue);
@@ -88,7 +89,15 @@ export async function addLibraryListQueue() {
     refs.watchedBtn.classList.remove('button--active');
   } catch (error) {}
 
+  if (!localStorage.getItem('queue')) {
+    refs.subtitle.classList.remove('visually-hidden');
+  }
+
   if (localStorage.getItem('queue')) {
+    refs.subtitle.classList.add('visually-hidden');
     markupMyLibrary(queueFilm);
+    if (!queueFilm.length) {
+      refs.subtitle.classList.remove('visually-hidden');
+    }
   }
 }

@@ -18,6 +18,7 @@ if (isHeaderMain) {
 async function startGallery() {
   addLoadingSpinner();
 
+  refs.paginationContainer.classList.remove('visually-hidden');
   await getTrendMovies();
 
   removeLoadingSpinner();
@@ -29,6 +30,7 @@ export async function getTrendMovies(page = 1) {
     const { results, total_pages } = await movies.getTrendingMovies(page);
 
     if (!results.length) {
+      refs.subtitle.classList.remove('visually-hidden');
       throw new Error(
         'Sorry, there are no movies matching your search query. Please try again.'
       );

@@ -13,6 +13,7 @@ const refs = {
   modalCard: document.querySelector('.modal'),
   modalContent: document.querySelector('.modal__content'),
   modalCloseBtn: document.querySelector('.modal__close-btn'),
+  subtitle: document.querySelector('.filmoteka__subtitle'),
 };
 
 // Слухачі подій
@@ -43,7 +44,19 @@ function checkWatched() {
   if (localStorage.getItem('watched')) {
     watchedFilm = JSON.parse(localStorage.getItem('watched'));
     watchedFilmId = JSON.parse(localStorage.getItem('watchedId'));
+    // if (!watchedFilm.length) {
+    //   console.log('watchedFilm ', watchedFilm.length);
+    //   refs.subtitle.classList.remove('visually-hidden');
+    //   console.log('refs.subtitle ', refs.subtitle);
+    //   // return;
+    // }
+    // refs.subtitle.classList.add('visually-hidden');
+    // return;
   }
+  // if (!localStorage.getItem('watched')) {
+  //   refs.subtitle.classList.remove('visually-hidden');
+  //   console.log('refs.subtitle 1', refs.subtitle);
+  // }
 }
 
 // Запис в LocalStorage
@@ -104,7 +117,18 @@ export async function addLibraryListWatched() {
     refs.queueBtn.classList.remove('button--active');
   } catch (error) {}
 
+  if (!localStorage.getItem('watched')) {
+    refs.subtitle.classList.remove('visually-hidden');
+  }
+
   if (localStorage.getItem('watched')) {
+    refs.subtitle.classList.add('visually-hidden');
     markupMyLibrary(watchedFilm);
+    if (!watchedFilm.length) {
+      console.log('watchedFilm ', watchedFilm.length);
+      refs.subtitle.classList.remove('visually-hidden');
+      console.log('refs.subtitle ', refs.subtitle);
+      // return;
+    }
   }
 }
