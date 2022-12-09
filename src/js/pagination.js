@@ -1,10 +1,42 @@
 import Pagination from 'tui-pagination';
 // import 'tui-pagination/dist/tui-pagination.css';
-import { getTrendMovies } from './gallery';
+import { getTrendMovies, getAppendMovies } from './gallery';
 import moveUp from './move-up';
 import refs from './refs';
+import { Movies } from './fetch';
+import { markupFilmoteka } from './markup';
+import { APIKey } from './apikey';
+// import ShowMore from './show-more-btn';
+import { showMore } from './gallery';
 
-export function makePaginationOptions(totalResults = 10000, currentPage = 1) {
+const movies = new Movies(APIKey);
+
+// export const showMore = new ShowMore({ selector: '.show-more', hidden: true });
+
+const nextOptions = {
+  nextPage: 1,
+  async addNextTrendingMovies() {
+    try {
+      this.nextPage += 1;
+      const { results, total_pages } = await movies.getTrendingMovies(
+        this.nextPage
+      );
+      markupFilmoteka(results);
+      showMore.enable();
+
+      if (total_pages === this.nextPage) {
+        showMore.hide();
+      }
+    } catch (error) {
+      console.log(error.name, error.message);
+    }
+  },
+};
+
+export function makePaginationOptions(
+  totalResults = 20000,
+  currentPage = nextOptions.nextPage
+) {
   return {
     totalItems: totalResults,
     itemsPerPage: 20,
@@ -44,10 +76,29 @@ paginationStart.on('afterMove', updateMoviesList);
 
 export async function updateMoviesList(event) {
   const currentPageStart = event.page;
-
-  console.log('currentPageStart -->', currentPageStart);
+  nextOptions.nextPage = currentPageStart;
 
   await getTrendMovies(currentPageStart);
 
   moveUp();
+}
+
+showMore.refs.blockShowMore.addEventListener('click', onShowMoreClick);
+
+async function onShowMoreClick() {
+  showMore.disable();
+
+  await nextOptions.addNextTrendingMovies();
+
+  paginationStart.off();
+  paginationStart.on('afterMove', updateMoviesListByShowMore);
+  paginationStart.movePageTo(nextOptions.nextPage);
+  paginationStart.off();
+  paginationStart.on('afterMove', updateMoviesList);
+}
+
+export function updateMoviesListByShowMore(event) {
+  nextOptions.nextPage = event.page;
+
+  getAppendMovies(event.page);
 }

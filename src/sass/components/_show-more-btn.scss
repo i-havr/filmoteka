@@ -1,0 +1,52 @@
+.show-more {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+  margin: 0px auto;
+  //   padding-top: 20px;
+  //   padding-bottom: 20px;
+  cursor: pointer;
+  border-top: 1px solid #ececec;
+  border-bottom: 1px solid #ececec;
+
+  &:hover,
+  &:focus {
+    // color: red;
+    text-decoration: underline;
+  }
+}
+
+.show-more__element {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  height: 60%;
+  width: auto;
+}
+
+.show-more__text {
+  display: block;
+}
+
+.show-more__icon {
+  height: 100%;
+  margin-right: 15px;
+  fill: var(--main-accent-color);
+  transition: transform 1000ms linear;
+
+  &.rotated {
+    opacity: 0.5;
+    animation: 2s linear 0s normal none infinite running rot;
+  }
+
+  @keyframes rot {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}

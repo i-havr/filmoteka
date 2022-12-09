@@ -4,4 +4,5 @@ export default {
   libraryList: document.querySelector('#library-list'),
   header: document.querySelector('.header'),
   paginationContainer: document.getElementById('pagination'),
+  showMoreBtn: document.querySelector('.show-more'),
 };

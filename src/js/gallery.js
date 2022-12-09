@@ -5,6 +5,10 @@ import { markupFilmoteka } from './markup';
 // import { getGenres } from './genres';
 import { APIKey } from './apikey';
 import refs from './refs';
+import ShowMore from './show-more-btn';
+
+const movies = new Movies(APIKey);
+export const showMore = new ShowMore({ selector: '.show-more', hidden: true });
 
 let searchValue = 'cat';
 const isHeaderMain = refs.header.classList.contains('header--home');
@@ -31,11 +35,9 @@ async function startGallery() {
 }
 
 // Page from pagination
-export async function getTrendMovies(page) {
-  const movies = new Movies(APIKey);
-
+export async function getTrendMovies(page = 1) {
   try {
-    const { results } = await movies.getTrendingMovies(page);
+    const { results, total_pages } = await movies.getTrendingMovies(page);
 
     if (results.length === 0) {
       throw new Error(
@@ -44,6 +46,27 @@ export async function getTrendMovies(page) {
     }
 
     clearFilmoteka();
+    showMore.hide();
+
+    markupFilmoteka(results);
+
+    if (total_pages > 20 && page !== total_pages) {
+      showMore.show();
+      showMore.enable();
+    }
+  } catch (error) {
+    console.log(error.name);
+    console.log(error.message);
+  }
+}
+
+export async function getAppendMovies(page) {
+  try {
+    const { results } = await movies.getTrendingMovies(page);
+
+    if (results.length < 20) {
+      showMore.hide();
+    }
 
     markupFilmoteka(results);
   } catch (error) {
