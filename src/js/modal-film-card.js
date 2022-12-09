@@ -7,6 +7,7 @@ import { addLibraryListWatched } from './watched';
 import { addLibraryListQueue } from './queue';
 const bodyScrollLock = require('body-scroll-lock');
 import foto from '../images/poster/poster-not-found-desk.jpg';
+// import { markupGenresLibrary } from './genres';
 
 export default class ModalMovie {
   constructor(
@@ -138,7 +139,6 @@ export default class ModalMovie {
       original_title,
       genres,
       overview,
-      video,
       id,
     } = data;
 
@@ -150,6 +150,7 @@ export default class ModalMovie {
     if (overview.length === 0) {
       overview = 'There is no description';
     }
+    // genres = markupGenresLibrary(genres);
     if (genres.length === 0) {
       genres = [
         {
@@ -165,11 +166,7 @@ export default class ModalMovie {
     const markup = `
     <div class="movie-details__preview-wrapper" data-id="${id}">
         <img class="movie-details__img" src="${img}"/>
-        ${
-          video
-            ? '<button class="button movie-details__button-trailer modal__button" data-trailer type="button">Show trailer</button>'
-            : ''
-        }
+          <button class="button movie-details__button-trailer modal__button visually-hidden" data-trailer type="button">Show trailer</button>
     </div>
     <div class="movie-details__thumb">
     <div class="movie-details__content"><h3 class="movie-details__title">${title}</h3>
@@ -195,20 +192,27 @@ export default class ModalMovie {
     createBtnWatched(id);
     createBtnQueue(id);
 
-    if (video) {
-      this.startListenTrailerClick(id);
-    }
+    this.startListenTrailerClick(id);
   }
 
-  startListenTrailerClick(id) {
+  async startListenTrailerClick(id) {
     const trailerRun = this.modalContent.querySelector('[data-trailer]');
 
+    const movies = new Movies(this.APIKey);
+    const { results } = await movies.getMovieTrailers(id);
+
+    // Якщо немає результатів, то нічого не робимо
+    if (!results.length) return;
+
+    const youTubeVideo = results.find(
+      vid => vid.site === 'YouTube' && vid.type === 'Trailer'
+    );
+
+    // Якщо немає трейлерів, то нічого не робимо
+    if (!youTubeVideo) return;
+
+    trailerRun.classList.remove('visually-hidden');
     trailerRun.addEventListener('click', async () => {
-      const movies = new Movies(this.APIKey);
-      const { results } = await movies.getMovieTrailers(id);
-
-      const youTubeVideo = results.find(vid => vid.site === 'YouTube');
-
       const instance = basicLightbox.create(`
         <iframe src="https://www.youtube.com/embed/${youTubeVideo.key}" width="560" height="315" frameborder="0"></iframe>
       `);

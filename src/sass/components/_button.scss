@@ -54,6 +54,7 @@
   &:hover,
   :focus {
     color: var(--main-light-color);
+    opacity: 1;
   }
 
   &--active {

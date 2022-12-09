@@ -53,8 +53,8 @@ export function markupCard(imgObj) {
 
 export function markupCardLibrary(imgObj) {
   const base_url = 'https://image.tmdb.org/t/p/';
-  // const file_size = 'original';
   const file_size = 'w500';
+
   let URI = `${base_url}${file_size}${imgObj.poster_path}`;
   if (imgObj.poster_path === null) {
     URI = foto;
@@ -83,32 +83,3 @@ export function markupCardLibrary(imgObj) {
 			</li>
     `;
 }
-
-// export function markupGenres(genre_ids) {
-//   if (genre_ids.length === 0) {
-//     return 'No information';
-//   }
-//   let genres = [];
-
-//   for (let i = 0; i < genre_ids.length; i++) {
-//     for (let j = 0; j < GENRES.length; j++) {
-//       const genre = GENRES[j];
-//       if (genre.id === genre_ids[i]) {
-//         genres.push(genre.name);
-//         continue;
-//       }
-//     }
-//   }
-
-//   return genres.join(', ');
-// }
-
-// export async function getGenres() {
-//   const movies = new Movies(APIKey);
-//   try {
-//     GENRES = await movies.getGenres();
-//     // console.log('GENRES ', GENRES);
-//   } catch (error) {
-//     console.log(error.message);
-//   }
-// }
