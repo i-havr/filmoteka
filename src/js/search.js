@@ -33,6 +33,7 @@ async function onSubmitForm(evt) {
   addLoadingSpinner();
 
   startSearch();
+  refs.paginationContainer.classList.remove('visually-hidden');
 }
 
 async function startSearch() {
@@ -54,8 +55,11 @@ async function getMoviesBySearch(page = 1) {
 
     if (results.length === 0) {
       onInvalidSearchQuery();
+      refs.paginationContainer.classList.add('visually-hidden');
+      refs.subtitle.classList.remove('visually-hidden');
       return;
     }
+    refs.subtitle.classList.add('visually-hidden');
 
     clearFilmoteka();
 

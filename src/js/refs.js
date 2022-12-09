@@ -5,4 +5,5 @@ export default {
   header: document.querySelector('.header'),
   paginationContainer: document.getElementById('pagination'),
   showMoreBtn: document.querySelector('.show-more'),
+  subtitle: document.querySelector('.filmoteka__subtitle'),
 };

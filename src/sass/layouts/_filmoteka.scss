@@ -5,12 +5,12 @@
 
   min-width: 320px;
   max-width: 480px;
-  min-height: 550px;
+  min-height: calc(100vh - 215px - 102px);
 
   @include mq(tab) {
     @include section(60px, 60px);
     max-width: 768px;
-    min-height: 850px;
+    min-height: calc(100vh - 215px - 79px);
   }
 
   @include mq(desk) {
@@ -31,4 +31,8 @@
 
 .filmoteka__list {
   margin-bottom: 15px;
+}
+.filmoteka__subtitle {
+  text-align: center;
+  padding-top: 64px;
 }

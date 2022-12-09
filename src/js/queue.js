@@ -8,6 +8,7 @@ const refs = {
   libraryList: document.querySelector('#library-list'),
   queueBtn: document.querySelector('#queue-btn'),
   watchedBtn: document.querySelector('#watched-btn'),
+  subtitle: document.querySelector('.filmoteka__subtitle'),
 };
 
 refs.modal.addEventListener('click', addToQueue);
@@ -78,7 +79,11 @@ function checkQueue() {
   if (localStorage.getItem('queue')) {
     queueFilm = JSON.parse(localStorage.getItem('queue'));
     queueFilmId = JSON.parse(localStorage.getItem('queueId'));
+    if (!queueFilm) {
+      refs.subtitle.classList.remove('visually-hidden');
+    }
   }
+  refs.subtitle.classList.add('visually-hidden');
 }
 
 export async function addLibraryListQueue() {

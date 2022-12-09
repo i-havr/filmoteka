@@ -13,6 +13,7 @@ const refs = {
   modalCard: document.querySelector('.modal'),
   modalContent: document.querySelector('.modal__content'),
   modalCloseBtn: document.querySelector('.modal__close-btn'),
+  subtitle: document.querySelector('.filmoteka__subtitle'),
 };
 
 // Слухачі подій
@@ -43,7 +44,16 @@ function checkWatched() {
   if (localStorage.getItem('watched')) {
     watchedFilm = JSON.parse(localStorage.getItem('watched'));
     watchedFilmId = JSON.parse(localStorage.getItem('watchedId'));
+    // refs.subtitle.classList.remove('visually-hidden');
+    if (!watchedFilm.length) {
+      console.log('watchedFilm ', watchedFilm.length);
+      refs.subtitle.classList.remove('visually-hidden');
+      console.log('refs.subtitle ', refs.subtitle);
+    }
+    return;
   }
+  console.log('refs.subtitle ', refs.subtitle);
+  refs.subtitle.classList.remove('visually-hidden');
 }
 
 // Запис в LocalStorage
